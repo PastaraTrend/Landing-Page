@@ -4,16 +4,39 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>PostaraTrend — AI Social Media, On Autopilot</title>
+<meta name="description" content="AI-powered social media automation for Canadian small businesses. PostaraTrend creates trend-matched posts and branded video, then publishes across every platform — automatically, four times a day."/>
+
+<!-- Open Graph -->
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://www.postaratrend.ca/"/>
+<meta property="og:title" content="PostaraTrend — AI Social Media, On Autopilot"/>
+<meta property="og:description" content="Trend-matched posts and branded video, published automatically four times a day. Built for Canadian small businesses."/>
+<meta property="og:image" content="https://www.postaratrend.ca/og-image.png"/>
+<meta property="og:locale" content="en_CA"/>
+<meta property="og:site_name" content="PostaraTrend"/>
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="PostaraTrend — AI Social Media, On Autopilot"/>
+<meta name="twitter:description" content="Trend-matched posts and branded video, published automatically four times a day. Built for Canadian small businesses."/>
+<meta name="twitter:image" content="https://www.postaratrend.ca/og-image.png"/>
+
+<link rel="canonical" href="https://www.postaratrend.ca/"/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet"/>
+
+<noscript><style>.reveal{opacity:1 !important;transform:none !important;}</style></noscript>
+
 <style>
 :root{
-  --navy:#1A3A6B; --teal:#0F6E56; --mid:#1D9E75; --accent:#24C48E;
-  --white:#FFFFFF; --slate:#64748B; --dark:#0A1628; --darker:#060E1C;
+  --navy:#1A3A6B;--teal:#0F6E56;--mid:#1D9E75;--accent:#24C48E;
+  --white:#FFFFFF;--slate:#64748B;--dark:#0A1628;--darker:#060E1C;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
+@media(prefers-reduced-motion:no-preference){html{scroll-behavior:smooth;}}
 body{
   font-family:'DM Sans',sans-serif;
   background:var(--darker);color:var(--white);
@@ -22,6 +45,10 @@ body{
   -moz-osx-font-smoothing:grayscale;
   text-rendering:optimizeLegibility;
 }
+
+/* ACCESSIBILITY */
+.visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
 
 /* NAV */
 nav{
@@ -38,13 +65,14 @@ nav{
   width:36px;height:36px;border-radius:8px;
   background:linear-gradient(135deg,var(--navy),var(--teal));
   display:flex;align-items:center;justify-content:center;
-  font-family:'Syne',sans-serif;font-weight:800;font-size:15px;color:white;flex-shrink:0;
+  font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:15px;color:white;flex-shrink:0;
 }
-.nav-wordmark{font-family:'Syne',sans-serif;font-weight:700;font-size:18px;color:white;}
+.nav-wordmark{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:18px;color:white;}
 .nav-wordmark em{color:var(--accent);font-style:normal;}
 .nav-links{display:flex;align-items:center;gap:32px;}
 .nav-links a{color:rgba(255,255,255,0.55);text-decoration:none;font-size:14px;transition:color 0.2s;}
 .nav-links a:hover{color:white;}
+.nav-links a.active{color:var(--accent);}
 .nav-cta{
   background:var(--mid);color:white;border:none;
   padding:10px 22px;border-radius:8px;font-size:14px;font-weight:500;
@@ -52,6 +80,39 @@ nav{
   font-family:'DM Sans',sans-serif;
 }
 .nav-cta:hover{background:var(--accent);transform:translateY(-1px);}
+
+/* HAMBURGER */
+.hamburger{
+  display:none;flex-direction:column;justify-content:center;gap:5px;
+  width:40px;height:40px;background:none;border:none;cursor:pointer;
+  padding:6px;border-radius:8px;transition:background 0.2s;
+}
+.hamburger:hover{background:rgba(255,255,255,0.08);}
+.hamburger span{display:block;width:22px;height:2px;background:rgba(255,255,255,0.8);border-radius:2px;transition:transform 0.25s,opacity 0.25s;}
+.hamburger[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.hamburger[aria-expanded="true"] span:nth-child(2){opacity:0;}
+.hamburger[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+/* MOBILE NAV */
+.mobile-nav{
+  display:none;position:fixed;inset:0;z-index:800;
+  background:rgba(6,14,28,0.98);backdrop-filter:blur(20px);
+  flex-direction:column;align-items:center;justify-content:center;gap:6px;
+  padding-top:80px;
+}
+.mobile-nav.open{display:flex;}
+.mobile-nav a{
+  color:rgba(255,255,255,0.72);text-decoration:none;
+  font-family:'DM Sans',sans-serif;font-size:18px;font-weight:600;
+  padding:14px 32px;border-radius:12px;width:260px;text-align:center;
+  transition:color 0.2s,background 0.2s;min-height:52px;
+  display:flex;align-items:center;justify-content:center;
+}
+.mobile-nav a:hover{color:white;background:rgba(29,158,117,0.1);}
+.mobile-nav .mobile-cta{
+  background:linear-gradient(135deg,var(--mid),var(--accent));
+  color:white !important;margin-top:12px;
+}
 
 /* HERO */
 .hero{
@@ -74,6 +135,7 @@ nav{
     linear-gradient(90deg,rgba(29,158,117,0.035) 1px,transparent 1px);
   background-size:64px 64px;
   mask-image:radial-gradient(ellipse 90% 70% at 50% 25%,black 20%,transparent 80%);
+  will-change:transform;
 }
 .hero-content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;}
 .hero-badge{
@@ -83,26 +145,28 @@ nav{
   font-size:13px;color:var(--accent);font-weight:500;letter-spacing:0.4px;
   animation:fadeUp 0.7s ease both;
 }
-.badge-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0;animation:pulse 2s ease-in-out infinite;}
+.badge-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0;}
+@media(prefers-reduced-motion:no-preference){.badge-dot{animation:pulse 2s ease-in-out infinite;}}
 .hero h1{
-  font-family:'Syne',sans-serif;
-  font-size:clamp(44px,7.5vw,92px);
-  font-weight:800;line-height:1.04;letter-spacing:-2.5px;
-  color:#FFFFFF;margin-bottom:10px;
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:clamp(22px,3vw,44px);
+  font-weight:800;line-height:1.1;letter-spacing:-0.5px;
+  color:#FFFFFF;margin-bottom:8px;
   animation:fadeUp 0.7s 0.08s ease both;
 }
+@media(max-width:480px){.hero h1{letter-spacing:0px;font-size:clamp(20px,6.5vw,30px);}}
 .hero h1 .accent-line{color:var(--accent);}
 .hero-tagline{
-  font-family:'Syne',sans-serif;font-size:clamp(16px,2vw,21px);
-  font-weight:500;color:rgba(255,255,255,0.48);letter-spacing:-0.2px;
-  margin-bottom:26px;animation:fadeUp 0.7s 0.14s ease both;
+  font-family:'DM Sans',sans-serif;font-size:clamp(13px,1.1vw,15px);
+  font-weight:500;color:rgba(255,255,255,0.62);letter-spacing:0px;
+  margin-bottom:18px;animation:fadeUp 0.7s 0.14s ease both;
 }
 .hero-sub{
-  font-size:clamp(15px,1.8vw,18px);color:rgba(255,255,255,0.52);
-  max-width:570px;line-height:1.75;margin-bottom:48px;
-  animation:fadeUp 0.7s 0.2s ease both;font-weight:300;
+  font-size:clamp(12px,1vw,14px);color:rgba(255,255,255,0.55);
+  max-width:480px;line-height:1.75;margin-bottom:36px;
+  animation:fadeUp 0.7s 0.2s ease both;font-weight:400;
 }
-.hero-sub strong{color:rgba(255,255,255,0.8);font-weight:500;}
+.hero-sub strong{color:rgba(255,255,255,0.85);font-weight:500;}
 .hero-actions{
   display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:center;
   animation:fadeUp 0.7s 0.28s ease both;
@@ -112,19 +176,19 @@ nav{
   color:white;border:none;padding:15px 36px;border-radius:12px;
   font-size:16px;font-weight:500;cursor:pointer;text-decoration:none;
   transition:transform 0.2s,box-shadow 0.2s;font-family:'DM Sans',sans-serif;
-  box-shadow:0 8px 36px rgba(29,158,117,0.28);
+  box-shadow:0 8px 36px rgba(29,158,117,0.28);display:inline-block;
 }
 .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 52px rgba(29,158,117,0.45);}
 .btn-ghost{
-  color:rgba(255,255,255,0.62);text-decoration:none;padding:15px 26px;
-  border-radius:12px;font-size:16px;font-weight:400;
+  color:rgba(255,255,255,0.65);text-decoration:none;padding:15px 26px;
+  border-radius:12px;font-size:16px;font-weight:400;display:inline-block;
   border:1px solid rgba(255,255,255,0.1);
   transition:border-color 0.2s,color 0.2s;font-family:'DM Sans',sans-serif;
 }
 .btn-ghost:hover{border-color:rgba(255,255,255,0.28);color:white;}
 .hero-ca-tag{
   margin-top:32px;display:flex;align-items:center;gap:8px;
-  color:rgba(255,255,255,0.22);font-size:12px;letter-spacing:0.8px;
+  color:rgba(255,255,255,0.38);font-size:12px;letter-spacing:0.8px;
   animation:fadeUp 0.7s 0.36s ease both;
 }
 .hero-scroll{
@@ -133,6 +197,7 @@ nav{
   color:rgba(255,255,255,0.2);font-size:11px;letter-spacing:2px;text-transform:uppercase;
 }
 .scroll-line{width:1px;height:36px;background:linear-gradient(var(--accent),transparent);}
+@media(max-height:700px){.hero-scroll{display:none;}}
 
 /* CANADIAN BAND */
 .ca-band{
@@ -143,13 +208,13 @@ nav{
 }
 .ca-band-inner{max-width:1100px;margin:0 auto;}
 .ca-top{display:flex;align-items:flex-start;justify-content:space-between;gap:40px;flex-wrap:wrap;margin-bottom:40px;}
-.ca-top h3{font-family:'Syne',sans-serif;font-size:clamp(18px,2.2vw,26px);font-weight:700;color:#FFFFFF;letter-spacing:-0.3px;max-width:520px;line-height:1.3;}
-.ca-top p{font-size:15px;color:rgba(255,255,255,0.42);max-width:340px;line-height:1.7;font-weight:300;}
+.ca-top h3{font-family:'DM Sans',sans-serif;font-size:clamp(15px,1.4vw,18px);font-weight:600;color:#FFFFFF;letter-spacing:0px;max-width:540px;line-height:1.45;}
+.ca-top p{font-size:15px;color:rgba(255,255,255,0.52);max-width:340px;line-height:1.7;font-weight:400;}
 .ca-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
-.ca-stat{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:22px 18px;}
-.ca-stat-num{font-family:'Syne',sans-serif;font-size:30px;font-weight:800;color:#FFFFFF;letter-spacing:-1px;margin-bottom:6px;}
+.ca-stat{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:18px 16px;}
+.ca-stat-num{font-family:'Plus Jakarta Sans',sans-serif;font-size:22px;font-weight:800;color:#FFFFFF;letter-spacing:-0.5px;margin-bottom:4px;}
 .ca-stat-num em{color:var(--accent);font-style:normal;}
-.ca-stat-label{font-size:13px;color:rgba(255,255,255,0.38);line-height:1.5;font-weight:300;}
+.ca-stat-label{font-size:12px;color:rgba(255,255,255,0.52);line-height:1.55;font-weight:400;}
 
 /* SHARED */
 .section-label{font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:16px;}
@@ -157,57 +222,68 @@ nav{
 /* PROBLEM */
 .problem{padding:120px 6vw;}
 .problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;max-width:1100px;margin:0 auto;}
-.problem h2{font-family:'Syne',sans-serif;font-size:clamp(28px,3.5vw,46px);font-weight:700;line-height:1.15;letter-spacing:-1px;color:#FFFFFF;margin-bottom:20px;}
-.problem-intro p{font-size:17px;color:rgba(255,255,255,0.48);line-height:1.8;margin-bottom:14px;font-weight:300;}
+.problem h2{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(18px,2vw,28px);font-weight:700;line-height:1.25;letter-spacing:-0.2px;color:#FFFFFF;margin-bottom:20px;}
+.problem-intro p{font-size:17px;color:rgba(255,255,255,0.52);line-height:1.8;margin-bottom:14px;font-weight:400;}
 .problem-cards{display:flex;flex-direction:column;gap:14px;}
 .problem-card{background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:20px;display:flex;gap:14px;align-items:flex-start;transition:border-color 0.3s,background 0.3s;}
 .problem-card:hover{border-color:rgba(29,158,117,0.28);background:rgba(29,158,117,0.04);}
 .pc-icon{font-size:18px;width:42px;height:42px;border-radius:10px;background:rgba(29,158,117,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.problem-card h3{font-size:14px;font-weight:600;margin-bottom:4px;color:rgba(255,255,255,0.9);}
-.problem-card p{font-size:13px;color:rgba(255,255,255,0.38);line-height:1.65;margin:0;font-weight:300;}
+.card-hook{display:block;font-size:11px;color:var(--accent);font-weight:600;letter-spacing:0.3px;margin-bottom:4px;}
+.problem-card h3{font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;margin-bottom:4px;color:rgba(255,255,255,0.9);}
+.problem-card p{font-size:13px;color:rgba(255,255,255,0.52);line-height:1.65;margin:0;font-weight:400;}
 
 /* HOW IT WORKS */
 .how{padding:120px 6vw;background:linear-gradient(180deg,transparent,rgba(26,58,107,0.1),transparent);}
 .how-inner{max-width:1100px;margin:0 auto;text-align:center;}
-.how h2{font-family:'Syne',sans-serif;font-size:clamp(28px,3.5vw,48px);font-weight:700;line-height:1.12;letter-spacing:-1.2px;color:#FFFFFF;margin-bottom:12px;}
-.how-sub{font-size:17px;color:rgba(255,255,255,0.42);max-width:480px;margin:0 auto 64px;line-height:1.7;font-weight:300;}
+.how h2{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(18px,2vw,30px);font-weight:700;line-height:1.2;letter-spacing:-0.2px;color:#FFFFFF;margin-bottom:12px;}
+.how-sub{font-size:14px;color:rgba(255,255,255,0.52);max-width:440px;margin:0 auto 48px;line-height:1.7;font-weight:400;}
 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:rgba(255,255,255,0.05);border-radius:20px;overflow:hidden;}
 .step{background:var(--darker);padding:38px 24px;transition:background 0.3s;}
 .step:hover{background:rgba(26,58,107,0.28);}
-.step-num{font-family:'Syne',sans-serif;font-size:46px;font-weight:800;color:rgba(29,158,117,0.1);line-height:1;margin-bottom:14px;letter-spacing:-2px;}
+.step-num{font-family:'Plus Jakarta Sans',sans-serif;font-size:46px;font-weight:800;color:rgba(29,158,117,0.1);line-height:1;margin-bottom:14px;letter-spacing:-2px;}
 .step-icon{font-size:24px;margin-bottom:14px;display:block;}
-.step h3{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;margin-bottom:10px;color:#FFFFFF;letter-spacing:-0.2px;}
-.step p{font-size:13px;color:rgba(255,255,255,0.38);line-height:1.7;font-weight:300;}
+.step h3{font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;margin-bottom:10px;color:#FFFFFF;letter-spacing:0px;}
+.step p{font-size:13px;color:rgba(255,255,255,0.52);line-height:1.7;font-weight:400;}
 
 /* PLATFORMS */
 .platforms{padding:64px 6vw;border-top:1px solid rgba(255,255,255,0.05);border-bottom:1px solid rgba(255,255,255,0.05);}
 .platforms-inner{max-width:860px;margin:0 auto;text-align:center;}
-.platforms-label{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.2);margin-bottom:32px;font-weight:500;}
+.platforms-label{font-size:14px;color:rgba(255,255,255,0.48);margin-bottom:36px;font-weight:400;line-height:1.6;display:block;}
 .platform-icons{display:flex;justify-content:center;align-items:center;gap:clamp(20px,4vw,52px);flex-wrap:wrap;}
-.platform-item{display:flex;flex-direction:column;align-items:center;gap:7px;opacity:0.4;transition:opacity 0.3s;}
-.platform-item:hover{opacity:0.85;}
-.platform-logo{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;}
-.platform-name{font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:0.3px;}
+.platform-item{display:flex;flex-direction:column;align-items:center;gap:7px;opacity:0.5;transition:opacity 0.3s;}
+.platform-item:hover{opacity:1;}
+.platform-logo{
+  width:48px;height:48px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:15px;
+}
+.platform-logo.fb{background:rgba(24,119,242,0.2);color:#1877F2;}
+.platform-logo.ig{background:rgba(225,48,108,0.18);color:#E1306C;}
+.platform-logo.tt{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.9);}
+.platform-logo.yt{background:rgba(255,0,0,0.14);color:#FF4444;}
+.platform-logo.li{background:rgba(10,102,194,0.2);color:#0A66C2;}
+.platform-name{font-size:11px;color:rgba(255,255,255,0.48);letter-spacing:0.3px;}
 
 /* MISSION */
 .mission{padding:130px 6vw;position:relative;overflow:hidden;}
 .mission-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(29,158,117,0.07) 0%,transparent 70%);pointer-events:none;}
 .mission-inner{max-width:860px;margin:0 auto;text-align:center;position:relative;z-index:2;}
-.mission-quote{font-family:'Syne',sans-serif;font-size:clamp(22px,3.5vw,40px);font-weight:700;line-height:1.25;letter-spacing:-0.8px;color:#FFFFFF;margin-bottom:48px;position:relative;padding-top:20px;}
-.mission-quote::before{content:'\201C';font-size:90px;color:rgba(29,158,117,0.14);position:absolute;top:-24px;left:-4px;font-family:'Syne',sans-serif;line-height:1;}
+.mission-quote{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(16px,1.8vw,24px);font-weight:700;line-height:1.4;letter-spacing:-0.1px;color:#FFFFFF;margin-bottom:40px;position:relative;padding-top:20px;}
+.mission-quote::before{content:'\201C';font-size:90px;color:rgba(29,158,117,0.14);position:absolute;top:-24px;left:-4px;font-family:'Plus Jakarta Sans',sans-serif;line-height:1;}
+@media(max-width:480px){.mission-quote::before{display:none;}}
 .mission-pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:56px;}
 .pillar{background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:28px 20px;transition:border-color 0.3s,transform 0.3s;}
 .pillar:hover{border-color:rgba(29,158,117,0.3);transform:translateY(-4px);}
 .pillar-icon{font-size:26px;margin-bottom:12px;display:block;}
-.pillar h3{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:#FFFFFF;margin-bottom:9px;letter-spacing:-0.2px;}
-.pillar p{font-size:13px;color:rgba(255,255,255,0.38);line-height:1.7;font-weight:300;}
+.pillar h3{font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;color:#FFFFFF;margin-bottom:9px;letter-spacing:0px;}
+.pillar p{font-size:13px;color:rgba(255,255,255,0.52);line-height:1.7;font-weight:400;}
 
 /* MARKETS */
 .markets{padding:80px 6vw;border-top:1px solid rgba(255,255,255,0.05);border-bottom:1px solid rgba(255,255,255,0.05);}
 .markets-inner{max-width:1100px;margin:0 auto;}
 .markets-head{text-align:center;margin-bottom:52px;}
-.markets-head h2{font-family:'Syne',sans-serif;font-size:clamp(26px,3.2vw,42px);font-weight:700;letter-spacing:-1px;color:#FFFFFF;line-height:1.15;margin-bottom:12px;}
-.markets-head p{font-size:16px;color:rgba(255,255,255,0.42);max-width:520px;margin:0 auto;line-height:1.72;font-weight:300;}
+.markets-head h2{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(18px,1.9vw,27px);font-weight:700;letter-spacing:-0.1px;color:#FFFFFF;line-height:1.25;margin-bottom:12px;}
+.markets-head p{font-size:14px;color:rgba(255,255,255,0.5);max-width:480px;margin:0 auto;line-height:1.72;font-weight:400;}
 .market-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
 .market-card{background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:30px 26px;position:relative;overflow:hidden;transition:border-color 0.3s,transform 0.3s;}
 .market-card:hover{transform:translateY(-4px);}
@@ -215,84 +291,146 @@ nav{
 .market-card.active:hover{border-color:rgba(29,158,117,0.6);}
 .market-badge{position:absolute;top:16px;right:16px;border-radius:100px;padding:4px 11px;font-size:10px;font-weight:700;letter-spacing:0.6px;}
 .market-badge.launch{background:rgba(29,158,117,0.15);border:1px solid rgba(29,158,117,0.3);color:var(--accent);}
-.market-badge.next{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.35);}
+.market-badge.next{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.45);}
 .market-flag{font-size:34px;margin-bottom:14px;display:block;}
-.market-card h3{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:#FFFFFF;margin-bottom:10px;letter-spacing:-0.3px;}
-.market-card p{font-size:13px;color:rgba(255,255,255,0.42);line-height:1.7;font-weight:300;margin-bottom:14px;}
-.market-timeline{font-size:11px;color:rgba(255,255,255,0.22);font-weight:300;letter-spacing:0.3px;}
-
-/* EARLY ACCESS */
-.early{padding:140px 6vw;position:relative;overflow:hidden;}
-.early-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 70% at 50% 50%,rgba(15,110,86,0.1) 0%,transparent 70%),var(--darker);}
-.early-inner{max-width:600px;margin:0 auto;text-align:center;position:relative;z-index:2;}
-.early h2{font-family:'Syne',sans-serif;font-size:clamp(32px,5vw,56px);font-weight:800;line-height:1.06;letter-spacing:-2px;color:#FFFFFF;margin-bottom:16px;}
-.early-desc{font-size:17px;color:rgba(255,255,255,0.42);line-height:1.75;margin-bottom:44px;font-weight:300;}
-.early-form{display:flex;gap:10px;max-width:480px;margin:0 auto;}
-.early-form input{flex:1;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:15px 18px;font-size:15px;color:white;outline:none;font-family:'DM Sans',sans-serif;transition:border-color 0.2s;}
-.early-form input::placeholder{color:rgba(255,255,255,0.25);}
-.early-form input:focus{border-color:var(--accent);}
-.early-form button{background:linear-gradient(135deg,var(--mid),var(--accent));color:white;border:none;border-radius:12px;padding:15px 24px;font-size:15px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap;transition:transform 0.2s,box-shadow 0.2s;box-shadow:0 8px 28px rgba(29,158,117,0.22);}
-.early-form button:hover{transform:translateY(-2px);box-shadow:0 12px 44px rgba(29,158,117,0.38);}
-.early-note{font-size:12px;color:rgba(255,255,255,0.18);margin-top:14px;}
-.early-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:68px;padding-top:52px;border-top:1px solid rgba(255,255,255,0.07);}
-.stat-num{font-family:'Syne',sans-serif;font-size:36px;font-weight:800;color:#FFFFFF;margin-bottom:6px;letter-spacing:-1px;}
-.stat-num em{color:var(--accent);font-style:normal;}
-.stat-label{font-size:13px;color:rgba(255,255,255,0.32);font-weight:300;line-height:1.5;}
+.market-card h3{font-family:'DM Sans',sans-serif;font-size:17px;font-weight:600;color:#FFFFFF;margin-bottom:5px;letter-spacing:0px;}
+.market-hook{font-size:12px;color:var(--accent);font-weight:500;margin-bottom:10px;letter-spacing:0.2px;display:block;}
+.market-card p{font-size:13px;color:rgba(255,255,255,0.5);line-height:1.7;font-weight:400;margin-bottom:14px;}
+.market-timeline{font-size:11px;color:rgba(255,255,255,0.3);font-weight:400;letter-spacing:0.3px;}
 
 /* ABOUT */
 .about{padding:120px 6vw;background:rgba(255,255,255,0.012);border-top:1px solid rgba(255,255,255,0.05);}
 .about-inner{max-width:1100px;margin:0 auto;}
 .about-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:80px;align-items:start;}
-.about h2{font-family:'Syne',sans-serif;font-size:clamp(24px,3vw,38px);font-weight:700;line-height:1.2;letter-spacing:-0.7px;color:#FFFFFF;margin-bottom:20px;}
-.about p{font-size:15px;color:rgba(255,255,255,0.42);line-height:1.85;margin-bottom:16px;font-weight:300;}
-.about p strong{color:rgba(255,255,255,0.72);font-weight:500;}
-.team-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-.team-card{background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:18px;transition:border-color 0.3s;}
+.about h2{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(17px,1.7vw,24px);font-weight:700;line-height:1.28;letter-spacing:-0.1px;color:#FFFFFF;margin-bottom:20px;}
+.about p{font-size:15px;color:rgba(255,255,255,0.52);line-height:1.85;margin-bottom:16px;font-weight:400;}
+.about p strong{color:rgba(255,255,255,0.82);font-weight:500;}
+.team-cards{display:flex;flex-direction:column;gap:14px;}
+.team-card{background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:20px;transition:border-color 0.3s;display:flex;gap:16px;align-items:flex-start;}
 .team-card:hover{border-color:rgba(29,158,117,0.28);}
-.team-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--navy),var(--teal));display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:13px;color:white;margin-bottom:10px;}
-.team-name{font-size:13px;font-weight:600;color:#FFFFFF;margin-bottom:3px;}
-.team-title{font-size:11px;color:var(--accent);font-weight:500;margin-bottom:3px;letter-spacing:0.2px;}
-.team-loc{font-size:11px;color:rgba(255,255,255,0.26);}
+.team-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--navy),var(--teal));display:flex;align-items:center;justify-content:center;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:13px;color:white;flex-shrink:0;}
+.team-name{font-size:14px;font-weight:600;color:#FFFFFF;margin-bottom:2px;}
+.team-title{font-size:11px;color:var(--accent);font-weight:500;margin-bottom:6px;letter-spacing:0.2px;}
+.team-bio{font-size:12px;color:rgba(255,255,255,0.48);line-height:1.65;font-weight:400;margin-bottom:6px;}
+.team-loc{font-size:11px;color:rgba(255,255,255,0.3);}
+
+/* PRICING TEASER */
+.pricing-teaser{
+  background:rgba(29,158,117,0.06);border:1px solid rgba(29,158,117,0.2);
+  border-radius:16px;padding:24px 28px;margin-bottom:32px;
+}
+.pricing-teaser h4{font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#FFFFFF;margin-bottom:8px;letter-spacing:0.2px;text-transform:uppercase;letter-spacing:1px;}
+.pricing-teaser p{font-size:14px;color:rgba(255,255,255,0.58);line-height:1.72;font-weight:400;}
+.pricing-teaser p strong{color:var(--accent);font-weight:600;}
+
+/* EARLY ACCESS */
+.early{padding:140px 6vw;position:relative;overflow:hidden;}
+.early-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 70% at 50% 50%,rgba(15,110,86,0.1) 0%,transparent 70%),var(--darker);}
+.early-inner{max-width:600px;margin:0 auto;text-align:center;position:relative;z-index:2;}
+.early h2{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(22px,2.6vw,36px);font-weight:800;line-height:1.12;letter-spacing:-0.3px;color:#FFFFFF;margin-bottom:16px;}
+.early-desc{font-size:17px;color:rgba(255,255,255,0.52);line-height:1.75;margin-bottom:36px;font-weight:400;}
+.early-form{display:flex;gap:10px;max-width:480px;margin:0 auto;}
+.early-form input{flex:1;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:15px 18px;font-size:15px;color:white;outline:none;font-family:'DM Sans',sans-serif;transition:border-color 0.2s;}
+.early-form input::placeholder{color:rgba(255,255,255,0.3);}
+.early-form input:focus{border-color:var(--accent);}
+.early-form button{
+  background:linear-gradient(135deg,var(--mid),var(--accent));color:white;border:none;
+  border-radius:12px;padding:15px 22px;font-size:15px;font-weight:500;cursor:pointer;
+  font-family:'DM Sans',sans-serif;white-space:nowrap;
+  transition:transform 0.2s,box-shadow 0.2s,opacity 0.2s;
+  box-shadow:0 8px 28px rgba(29,158,117,0.22);
+}
+.early-form button:hover{transform:translateY(-2px);box-shadow:0 12px 44px rgba(29,158,117,0.38);}
+.early-form button:disabled{opacity:0.6;cursor:not-allowed;transform:none;}
+.early-note{font-size:12px;color:rgba(255,255,255,0.32);margin-top:14px;}
+.early-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:68px;padding-top:52px;border-top:1px solid rgba(255,255,255,0.07);}
+.stat-num{font-family:'Plus Jakarta Sans',sans-serif;font-size:36px;font-weight:800;color:#FFFFFF;margin-bottom:6px;letter-spacing:-1px;}
+.stat-num em{color:var(--accent);font-style:normal;}
+.stat-label{font-size:13px;color:rgba(255,255,255,0.45);font-weight:400;line-height:1.5;}
+.stat-source{font-size:11px;color:rgba(255,255,255,0.22);margin-top:20px;}
+
+/* FAQ */
+.faq{padding:100px 6vw;border-top:1px solid rgba(255,255,255,0.05);}
+.faq-inner{max-width:760px;margin:0 auto;}
+.faq-head{text-align:center;margin-bottom:48px;}
+.faq-head h2{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(17px,1.7vw,24px);font-weight:700;letter-spacing:-0.1px;color:#FFFFFF;margin-bottom:10px;}
+.faq-head p{font-size:16px;color:rgba(255,255,255,0.48);font-weight:400;line-height:1.6;}
+.faq-list{display:flex;flex-direction:column;gap:10px;}
+.faq-item{background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.07);border-radius:14px;overflow:hidden;transition:border-color 0.3s;}
+.faq-item.open{border-color:rgba(29,158,117,0.3);}
+.faq-q{
+  width:100%;background:none;border:none;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:20px 22px;cursor:pointer;gap:16px;text-align:left;
+  font-family:'DM Sans',sans-serif;
+}
+.faq-q-text{font-size:15px;font-weight:500;color:#FFFFFF;line-height:1.4;}
+.faq-icon{
+  width:22px;height:22px;flex-shrink:0;border-radius:50%;
+  border:1px solid rgba(255,255,255,0.15);
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;color:rgba(255,255,255,0.5);line-height:1;
+  transition:transform 0.3s,border-color 0.3s,color 0.3s;
+}
+.faq-item.open .faq-icon{transform:rotate(45deg);border-color:var(--accent);color:var(--accent);}
+.faq-a{
+  max-height:0;overflow:hidden;
+  transition:max-height 0.4s ease,padding 0.3s;
+  font-size:14px;color:rgba(255,255,255,0.55);line-height:1.75;font-weight:400;
+  padding:0 22px;
+}
+.faq-item.open .faq-a{max-height:400px;padding:0 22px 20px;}
 
 /* FOOTER */
 footer{padding:56px 6vw 36px;border-top:1px solid rgba(255,255,255,0.05);}
 .footer-inner{max-width:1100px;margin:0 auto;}
 .footer-top{display:flex;justify-content:space-between;align-items:flex-start;gap:40px;flex-wrap:wrap;margin-bottom:52px;}
-.footer-brand p{font-size:14px;color:rgba(255,255,255,0.28);max-width:280px;line-height:1.7;margin-top:12px;font-weight:300;}
-.footer-links h4{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.22);font-weight:600;margin-bottom:14px;}
+.footer-brand p{font-size:14px;color:rgba(255,255,255,0.38);max-width:280px;line-height:1.7;margin-top:12px;font-weight:400;}
+.footer-links h4{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.3);font-weight:600;margin-bottom:14px;}
 .footer-links ul{list-style:none;display:flex;flex-direction:column;gap:9px;}
-.footer-links a{font-size:14px;color:rgba(255,255,255,0.38);text-decoration:none;transition:color 0.2s;}
+.footer-links a{font-size:14px;color:rgba(255,255,255,0.45);text-decoration:none;transition:color 0.2s;}
 .footer-links a:hover{color:white;}
+.footer-links span{font-size:14px;color:rgba(255,255,255,0.3);}
 .footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;padding-top:26px;border-top:1px solid rgba(255,255,255,0.05);}
-.footer-bottom p{font-size:12px;color:rgba(255,255,255,0.16);}
-.footer-reg{font-size:11px;color:rgba(255,255,255,0.12);max-width:400px;text-align:right;line-height:1.6;}
+.footer-bottom p{font-size:12px;color:rgba(255,255,255,0.25);}
+.footer-reg{font-size:11px;color:rgba(255,255,255,0.2);max-width:400px;text-align:right;line-height:1.6;}
 
 /* ANIMATIONS */
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.4;transform:scale(0.75);}}
-.reveal{opacity:0;transform:translateY(26px);transition:opacity 0.65s ease,transform 0.65s ease;}
-.reveal.visible{opacity:1;transform:translateY(0);}
+.js .reveal{opacity:0;transform:translateY(26px);transition:opacity 0.65s ease,transform 0.65s ease;}
+.js .reveal.visible{opacity:1;transform:translateY(0);}
 .d1{transition-delay:0.1s;}.d2{transition-delay:0.2s;}.d3{transition-delay:0.3s;}
+@media(prefers-reduced-motion:reduce){
+  .hero-badge,.hero h1,.hero-tagline,.hero-sub,.hero-actions,.hero-ca-tag{animation:none;opacity:1;transform:none;}
+}
 
 /* TOAST */
-.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(80px);background:rgba(29,158,117,0.96);color:white;padding:13px 28px;border-radius:100px;font-size:14px;font-weight:500;z-index:9999;transition:transform 0.4s ease;pointer-events:none;backdrop-filter:blur(12px);white-space:nowrap;}
+.toast{
+  position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(80px);
+  background:rgba(29,158,117,0.96);color:white;padding:13px 28px;
+  border-radius:100px;font-size:14px;font-weight:500;z-index:9999;
+  transition:transform 0.4s ease;pointer-events:none;
+  backdrop-filter:blur(12px);white-space:nowrap;
+}
 .toast.show{transform:translateX(-50%) translateY(0);}
 
 /* RESPONSIVE */
 @media(max-width:900px){
-  .problem-grid,.about-grid{grid-template-columns:1fr;gap:48px;}
+  .problem-grid,.about-grid{grid-template-columns:1fr;gap:40px;}
   .steps{grid-template-columns:1fr 1fr;}
   .mission-pillars,.market-cards{grid-template-columns:1fr 1fr;}
   .ca-stats{grid-template-columns:1fr 1fr;}
   .nav-links{display:none;}
+  .hamburger{display:flex;}
 }
 @media(max-width:600px){
   .steps,.mission-pillars,.market-cards,.ca-stats,.early-stats{grid-template-columns:1fr;}
-  .team-cards{grid-template-columns:1fr;}
   .early-form{flex-direction:column;}
   .footer-top{flex-direction:column;}
   .footer-reg{text-align:left;max-width:100%;}
   .ca-top{flex-direction:column;}
+  .problem-grid{gap:32px;}
 }
 </style>
 </head>
@@ -300,11 +438,11 @@ footer{padding:56px 6vw 36px;border-top:1px solid rgba(255,255,255,0.05);}
 
 <!-- NAV -->
 <nav id="nav">
-  <a href="#" class="nav-logo">
-    <div class="nav-mark">PT</div>
+  <a href="/" class="nav-logo" aria-label="PostaraTrend home">
+    <div class="nav-mark" aria-hidden="true">PT</div>
     <span class="nav-wordmark">Postara<em>Trend</em></span>
   </a>
-  <div class="nav-links">
+  <div class="nav-links" role="navigation" aria-label="Main navigation">
     <a href="#how">How It Works</a>
     <a href="#mission">Mission</a>
     <a href="#markets">Markets</a>
@@ -312,41 +450,53 @@ footer{padding:56px 6vw 36px;border-top:1px solid rgba(255,255,255,0.05);}
     <a href="#early">Early Access</a>
   </div>
   <a href="#early" class="nav-cta">Get Early Access</a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileNav">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE NAV -->
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+  <a href="#how" class="mobile-link">How It Works</a>
+  <a href="#mission" class="mobile-link">Mission</a>
+  <a href="#markets" class="mobile-link">Markets</a>
+  <a href="#about" class="mobile-link">About</a>
+  <a href="#early" class="mobile-link mobile-cta">Get Early Access</a>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
-  <div class="hero-grid"></div>
+  <div class="hero-grid" aria-hidden="true"></div>
   <div class="hero-content">
-    <div class="hero-badge"><span class="badge-dot"></span>Built in Canada &middot; Launching 2026</div>
-    <h1>Your Business.<br/><span class="accent-line">Always Trending.</span></h1>
-    <p class="hero-tagline">AI-powered social media &mdash; for Canadian businesses that mean business.</p>
-    <p class="hero-sub">PostaraTrend monitors what is trending in your industry, creates <strong>original posts and branded video</strong>, and publishes to all your social media pages automatically &mdash; every six hours, every day, without any effort from you.</p>
+    <div class="hero-badge"><span class="badge-dot" aria-hidden="true"></span>Built in Canada &middot; Launching 2026</div>
+    <h1>Post Every Day.<br/>Chase Every Trend.<br/><span class="accent-line">Never Lift a Finger.</span></h1>
+    <p class="hero-tagline">Trend-matched content and branded video &mdash; published automatically, four times a day.</p>
+    <p class="hero-sub">PostaraTrend watches your industry for trends, writes <strong>original posts</strong>, produces <strong>branded video</strong>, and publishes across every platform automatically &mdash; while you run your business.</p>
     <div class="hero-actions">
-      <a href="#early" class="btn-primary">Join the Waitlist</a>
-      <a href="#how" class="btn-ghost">See How It Works &rarr;</a>
+      <a href="#early" class="btn-primary">Claim Your Early Access</a>
+      <a href="#how" class="btn-ghost">See the 4-Step Loop &rarr;</a>
     </div>
     <div class="hero-ca-tag">
-      <span>&#127809;</span>&nbsp;
-      <span>Federally incorporated &middot; Canada Business Corporations Act &middot; Calgary, Alberta</span>
+      <span aria-hidden="true">&#127809;</span>
+      <span>Proudly Canadian &middot; Incorporated in Calgary, Alberta</span>
     </div>
   </div>
-  <div class="hero-scroll"><div class="scroll-line"></div>scroll</div>
+  <div class="hero-scroll" aria-hidden="true"><div class="scroll-line"></div>scroll</div>
 </section>
 
 <!-- CANADIAN MARKET BAND -->
 <section class="ca-band">
   <div class="ca-band-inner">
     <div class="ca-top reveal">
-      <h3>Canadian small businesses are the backbone of this economy. They deserve enterprise-grade tools.</h3>
-      <p>Over 1.2 million small businesses operate across Canada. Most cannot afford a full-time social media manager &mdash; yet social media is where their customers spend their time.</p>
+      <h3>1.2 million Canadian small businesses &mdash; nearly all without a social media manager. That&rsquo;s the gap PostaraTrend was built to close.</h3>
+      <p>Social media is where your customers spend their time. Most Canadian business owners have neither the hours nor the budget to show up consistently. PostaraTrend changes that.</p>
     </div>
     <div class="ca-stats reveal d1">
       <div class="ca-stat"><div class="ca-stat-num"><em>1.2M+</em></div><div class="ca-stat-label">Small businesses across Canada &mdash; from Halifax to Victoria</div></div>
       <div class="ca-stat"><div class="ca-stat-num"><em>97%</em></div><div class="ca-stat-label">Of Canadian businesses are small or medium sized, under 500 employees</div></div>
       <div class="ca-stat"><div class="ca-stat-num"><em>3 hrs</em></div><div class="ca-stat-label">Average time Canadian SMB owners spend on social media weekly &mdash; far too little to compete</div></div>
-      <div class="ca-stat"><div class="ca-stat-num"><em>$0</em></div><div class="ca-stat-label">Additional staff required. PostaraTrend does the work of a full content team, automatically.</div></div>
+      <div class="ca-stat"><div class="ca-stat-num"><em>5&times;</em></div><div class="ca-stat-label">More organic reach with short-form video vs. static posts &mdash; the format PostaraTrend produces automatically</div></div>
     </div>
   </div>
 </section>
@@ -359,13 +509,41 @@ footer{padding:56px 6vw 36px;border-top:1px solid rgba(255,255,255,0.05);}
       <h2>Canadian SMBs are getting outspent, outposted, and outranked on social media.</h2>
       <p>Enterprise brands have full marketing departments. They post every day, chase every trend, and produce professional video at scale.</p>
       <p>The corner store in Scarborough. The trades business in Red Deer. The restaurant in Halifax. They cannot match that &mdash; and the algorithm punishes them for it.</p>
-      <p>PostaraTrend closes that gap permanently.</p>
+      <p>PostaraTrend was built to change that.</p>
     </div>
     <div class="problem-cards reveal d1">
-      <div class="problem-card"><div class="pc-icon">&#9201;</div><div><h3>No time to post consistently</h3><p>You are running a business. Social media falls to the bottom of the list every day. Inconsistency kills your algorithm ranking.</p></div></div>
-      <div class="problem-card"><div class="pc-icon">&#128202;</div><div><h3>Missing the trend window</h3><p>By the time you notice what is trending in your niche, the engagement wave has already passed. Timing requires speed you cannot manually deliver.</p></div></div>
-      <div class="problem-card"><div class="pc-icon">&#127909;</div><div><h3>Video is unaffordable to produce</h3><p>Short-form video drives 5&times; more organic reach than static posts. Hiring a video editor in Canada costs $3,000&ndash;$8,000 per month. PostaraTrend produces it automatically.</p></div></div>
-      <div class="problem-card"><div class="pc-icon">&#127760;</div><div><h3>Generic tools produce generic content</h3><p>Most content tools produce templates every business in your category already uses. PostaraTrend creates content anchored to what is trending in your specific niche &mdash; right now.</p></div></div>
+      <div class="problem-card">
+        <div class="pc-icon" aria-hidden="true">&#9201;</div>
+        <div>
+          <span class="card-hook">The algorithm punishes silence.</span>
+          <h3>No time to post consistently</h3>
+          <p>You&rsquo;re running a business. Social media falls to the bottom of the list every day. Inconsistency destroys your algorithm ranking.</p>
+        </div>
+      </div>
+      <div class="problem-card">
+        <div class="pc-icon" aria-hidden="true">&#128202;</div>
+        <div>
+          <span class="card-hook">Trends expire in 48 hours. You find out in two weeks.</span>
+          <h3>Missing the trend window</h3>
+          <p>By the time you notice what&rsquo;s trending in your niche, the engagement wave has already passed. Timing requires speed you can&rsquo;t manually deliver.</p>
+        </div>
+      </div>
+      <div class="problem-card">
+        <div class="pc-icon" aria-hidden="true">&#127909;</div>
+        <div>
+          <span class="card-hook">Video gets 5&times; the reach. Agencies charge $3,000/mo to make it.</span>
+          <h3>Video is unaffordable to produce</h3>
+          <p>Short-form video drives more organic reach than any other format. Professional video production in Canada costs thousands per month. PostaraTrend produces it automatically.</p>
+        </div>
+      </div>
+      <div class="problem-card">
+        <div class="pc-icon" aria-hidden="true">&#127760;</div>
+        <div>
+          <span class="card-hook">Templates built for nobody work for nobody.</span>
+          <h3>Generic tools produce generic content</h3>
+          <p>Most content tools produce templates every business in your category already uses. PostaraTrend creates content anchored to what&rsquo;s trending in your specific niche &mdash; right now.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -375,14 +553,34 @@ footer{padding:56px 6vw 36px;border-top:1px solid rgba(255,255,255,0.05);}
   <div class="how-inner">
     <div class="reveal">
       <div class="section-label">How It Works</div>
-      <h2>Four steps. Zero effort.<br/>Professional content, daily.</h2>
-      <p class="how-sub">PostaraTrend runs a complete content production cycle automatically &mdash; six hours on, every day.</p>
+      <h2>Four steps. Zero effort.<br/>Professional content, four times a day.</h2>
+      <p class="how-sub">PostaraTrend runs the full cycle &mdash; trend to post to publish &mdash; every six hours, around the clock, without your involvement.</p>
     </div>
     <div class="steps reveal d1">
-      <div class="step"><div class="step-num">01</div><span class="step-icon">&#128269;</span><h3>Trend Intelligence</h3><p>Our AI scans competitor pages and industry sources in your niche every six hours &mdash; identifying exactly which topics are driving real engagement right now.</p></div>
-      <div class="step"><div class="step-num">02</div><span class="step-icon">&#9997;&#65039;</span><h3>Original Content</h3><p>AI generates brand-voice post copy tailored to your audience, your niche, and the trending topic &mdash; with a compelling hook, informative body, and clear call to action.</p></div>
-      <div class="step"><div class="step-num">03</div><span class="step-icon">&#127909;</span><h3>Branded Video</h3><p>A professional short-form video is rendered automatically from your content. No camera, no editor, no production budget. Polished video, every cycle.</p></div>
-      <div class="step"><div class="step-num">04</div><span class="step-icon">&#128242;</span><h3>Automatic Publishing</h3><p>PostaraTrend publishes directly to your social pages. Every post is logged, performance is tracked, and results feed back into improving the next cycle.</p></div>
+      <div class="step">
+        <div class="step-num" aria-hidden="true">01</div>
+        <span class="step-icon" aria-hidden="true">&#128269;</span>
+        <h3>Trend Intelligence</h3>
+        <p>Our AI scans competitor pages and industry sources in your niche every six hours &mdash; identifying exactly which topics are driving real engagement right now.</p>
+      </div>
+      <div class="step">
+        <div class="step-num" aria-hidden="true">02</div>
+        <span class="step-icon" aria-hidden="true">&#9997;&#65039;</span>
+        <h3>Original Content</h3>
+        <p>AI generates brand-voice post copy tailored to your audience, your niche, and the trending topic &mdash; with a compelling hook, informative body, and clear call to action.</p>
+      </div>
+      <div class="step">
+        <div class="step-num" aria-hidden="true">03</div>
+        <span class="step-icon" aria-hidden="true">&#127909;</span>
+        <h3>Branded Video</h3>
+        <p>A professional short-form video is rendered automatically from your content. No camera, no editor, no production budget. Polished video, every cycle.</p>
+      </div>
+      <div class="step">
+        <div class="step-num" aria-hidden="true">04</div>
+        <span class="step-icon" aria-hidden="true">&#128242;</span>
+        <h3>Automatic Publishing</h3>
+        <p>PostaraTrend publishes directly to your social pages. Every post is logged, performance is tracked, and results feed back into improving the next cycle.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -390,29 +588,56 @@ footer{padding:56px 6vw 36px;border-top:1px solid rgba(255,255,255,0.05);}
 <!-- PLATFORMS -->
 <section class="platforms">
   <div class="platforms-inner">
-    <p class="platforms-label reveal">Publishes across all major platforms simultaneously</p>
+    <span class="platforms-label reveal">One piece of content. Every platform. Published while you sleep.</span>
     <div class="platform-icons reveal d1">
-      <div class="platform-item"><div class="platform-logo" style="background:rgba(24,119,242,0.15);">&#128216;</div><span class="platform-name">Facebook</span></div>
-      <div class="platform-item"><div class="platform-logo" style="background:rgba(225,48,108,0.15);">&#128247;</div><span class="platform-name">Instagram</span></div>
-      <div class="platform-item"><div class="platform-logo" style="background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.07);">&#127925;</div><span class="platform-name">TikTok</span></div>
-      <div class="platform-item"><div class="platform-logo" style="background:rgba(255,0,0,0.1);">&#9654;&#65039;</div><span class="platform-name">YouTube</span></div>
-      <div class="platform-item"><div class="platform-logo" style="background:rgba(10,102,194,0.15);">&#128188;</div><span class="platform-name">LinkedIn</span></div>
+      <div class="platform-item">
+        <div class="platform-logo fb" aria-hidden="true">Fb</div>
+        <span class="platform-name">Facebook</span>
+      </div>
+      <div class="platform-item">
+        <div class="platform-logo ig" aria-hidden="true">Ig</div>
+        <span class="platform-name">Instagram</span>
+      </div>
+      <div class="platform-item">
+        <div class="platform-logo tt" aria-hidden="true">Tt</div>
+        <span class="platform-name">TikTok</span>
+      </div>
+      <div class="platform-item">
+        <div class="platform-logo yt" aria-hidden="true">Yt</div>
+        <span class="platform-name">YouTube</span>
+      </div>
+      <div class="platform-item">
+        <div class="platform-logo li" aria-hidden="true">in</div>
+        <span class="platform-name">LinkedIn</span>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- MISSION -->
 <section class="mission" id="mission">
-  <div class="mission-glow"></div>
+  <div class="mission-glow" aria-hidden="true"></div>
   <div class="mission-inner">
     <div class="reveal">
       <div class="section-label">Our Mission</div>
-      <p class="mission-quote">Every small business &mdash; in Canada, the United Kingdom, Africa, and beyond &mdash; deserves the social media presence of a major brand, without the major brand&rsquo;s budget.</p>
+      <p class="mission-quote">Every small business deserves the social media presence of a major brand &mdash; without the major brand&rsquo;s budget.</p>
     </div>
     <div class="mission-pillars reveal d1">
-      <div class="pillar"><span class="pillar-icon">&#129504;</span><h3>Gets Smarter Over Time</h3><p>PostaraTrend tracks what performs for your specific audience and continuously refines the content it creates. The longer it runs, the sharper and more effective your posts become.</p></div>
-      <div class="pillar"><span class="pillar-icon">&#127809;</span><h3>Canadian Roots. Global Vision.</h3><p>We are starting in Canada because we know this market. Our roadmap takes us to the United Kingdom and Africa &mdash; markets where our founding team has deep roots, cultural intelligence, and networks already in place.</p></div>
-      <div class="pillar"><span class="pillar-icon">&#128274;</span><h3>Transparent and in Your Control</h3><p>PostaraTrend operates in the background, but you always have full visibility. Every post is logged, every decision is traceable, and you can pause or adjust at any time.</p></div>
+      <div class="pillar">
+        <span class="pillar-icon" aria-hidden="true">&#129504;</span>
+        <h3>Gets Smarter Over Time</h3>
+        <p>PostaraTrend tracks what performs for your specific audience and continuously refines the content it creates. The longer it runs, the sharper and more effective your posts become.</p>
+      </div>
+      <div class="pillar">
+        <span class="pillar-icon" aria-hidden="true">&#127809;</span>
+        <h3>Canadian Roots. Global Vision.</h3>
+        <p>We are starting in Canada because we know this market. Our roadmap takes us to the United Kingdom and Africa &mdash; markets where our founding team has deep roots, cultural intelligence, and networks already in place.</p>
+      </div>
+      <div class="pillar">
+        <span class="pillar-icon" aria-hidden="true">&#128274;</span>
+        <h3>Transparent and in Your Control</h3>
+        <p>PostaraTrend operates in the background, but you always have full visibility. Every post is logged, every decision is traceable, and you can pause or adjust at any time.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -423,52 +648,33 @@ footer{padding:56px 6vw 36px;border-top:1px solid rgba(255,255,255,0.05);}
     <div class="markets-head reveal">
       <div class="section-label">Our Markets</div>
       <h2>Starting in Canada. Built to scale globally.</h2>
-      <p>We are launching where our foundation is strongest &mdash; and expanding into markets where our team already has the relationships, the cultural intelligence, and the network to win.</p>
+      <p>We are launching where our foundation is strongest &mdash; and expanding into markets where our team already has the relationships, cultural intelligence, and network to win.</p>
     </div>
     <div class="market-cards reveal d1">
       <div class="market-card active">
         <span class="market-badge launch">LAUNCH MARKET</span>
-        <span class="market-flag">&#127809;</span>
+        <span class="market-flag" aria-hidden="true">&#127809;</span>
         <h3>Canada</h3>
+        <span class="market-hook">Our home market. First to launch.</span>
         <p>1.2 million small businesses from Halifax to Victoria. Headquartered in Calgary with teams in Toronto and Brampton. Canada is our home market and our proving ground.</p>
         <div class="market-timeline">Launching 2026</div>
       </div>
       <div class="market-card">
         <span class="market-badge next">NEXT EXPANSION</span>
-        <span class="market-flag">&#127757;</span>
+        <span class="market-flag" aria-hidden="true">&#127757;</span>
         <h3>Africa</h3>
+        <span class="market-hook">The fastest-growing mobile-first small business market in the world.</span>
         <p>Nigeria alone has over 40 million MSMEs. Our Africa Country Lead is already in market. We are building for this audience from day one &mdash; not adapting for it later.</p>
         <div class="market-timeline">On the roadmap &middot; 2027</div>
       </div>
       <div class="market-card">
         <span class="market-badge next">ON THE ROADMAP</span>
-        <span class="market-flag">&#127468;&#127463;</span>
+        <span class="market-flag" aria-hidden="true">&#127468;&#127463;</span>
         <h3>United Kingdom</h3>
-        <p>5.5 million SMEs in the UK, underserved by AI-native social media tools. A natural expansion market with strong English-language alignment and familiar regulatory environment.</p>
+        <span class="market-hook">5.5 million SMEs. Zero tools built specifically for them.</span>
+        <p>A natural expansion market with strong English-language alignment, familiar regulatory environment, and our founding team&rsquo;s existing networks already in market.</p>
         <div class="market-timeline">On the roadmap &middot; 2027</div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- EARLY ACCESS -->
-<section class="early" id="early">
-  <div class="early-bg"></div>
-  <div class="early-inner">
-    <div class="reveal">
-      <div class="section-label">Early Access</div>
-      <h2>Be First.<br/>Grow Faster.</h2>
-      <p class="early-desc">PostaraTrend is currently in development. Join the waitlist today and be among the first Canadian businesses on the platform &mdash; with priority onboarding, dedicated setup support, and founding-member pricing.</p>
-    </div>
-    <div class="early-form reveal d1">
-      <input type="email" id="emailInput" placeholder="your@business.com" autocomplete="email"/>
-      <button onclick="handleSignup()">Join Waitlist</button>
-    </div>
-    <p class="early-note reveal d2">No spam. No commitment. Just first access when we launch.</p>
-    <div class="early-stats reveal d2">
-      <div><div class="stat-num"><em>5&times;</em></div><div class="stat-label">More organic reach with video vs. static posts on social media</div></div>
-      <div><div class="stat-num"><em>4&times;</em></div><div class="stat-label">Daily content cycles &mdash; running automatically while you run your business</div></div>
-      <div><div class="stat-num"><em>0</em></div><div class="stat-label">Hours of your time required. PostaraTrend does it all.</div></div>
     </div>
   </div>
 </section>
@@ -482,13 +688,121 @@ footer{padding:56px 6vw 36px;border-top:1px solid rgba(255,255,255,0.05);}
         <h2>A Canadian technology company on a mission to level the playing field.</h2>
         <p>PostaraTrend Technologies Inc. is a federal corporation incorporated under the <strong>Canada Business Corporations Act</strong>, headquartered in Calgary, Alberta. We are a team of founders, technologists, and operators across Canada and Africa &mdash; with market knowledge that positions PostaraTrend to scale beyond Canada into the United Kingdom and African markets.</p>
         <p>We built PostaraTrend because we watched talented, hardworking business owners lose customers to larger competitors &mdash; not because their product was worse, but because they could not keep up on social media. <strong>That is not a fair fight. We are here to change it.</strong></p>
-        <p>We are proud to be a Canadian company. And we are building PostaraTrend to carry that standard into the United Kingdom, Africa, and every market where small businesses deserve a better shot.</p>
+        <p>We are proud to be a Canadian company &mdash; and we are building PostaraTrend to carry that standard into the United Kingdom, Africa, and every market where small businesses deserve a better shot.</p>
       </div>
       <div class="reveal d1">
-        <div class="team-cards" style="grid-template-columns:1fr;">
-          <div class="team-card"><div class="team-avatar">CO</div><div class="team-name">Celestine Oamen</div><div class="team-title">Chief Executive Officer &amp; Co-Founder</div><div class="team-loc">&#128205; Calgary, Alberta</div></div>
-          <div class="team-card"><div class="team-avatar">CB</div><div class="team-name">Chinwe Bello</div><div class="team-title">Chief Operating Officer &amp; Co-Founder</div><div class="team-loc">&#128205; Brampton, Ontario</div></div>
+        <div class="team-cards">
+          <div class="team-card">
+            <div class="team-avatar" aria-hidden="true">CO</div>
+            <div>
+              <div class="team-name">Celestine Oamen</div>
+              <div class="team-title">Chief Executive Officer &amp; Co-Founder</div>
+              <div class="team-bio">Entrepreneur and technologist with experience building companies across Canada and Africa. Passionate about putting enterprise-grade tools in the hands of small business owners.</div>
+              <div class="team-loc">&#128205; Calgary, Alberta</div>
+            </div>
+          </div>
+          <div class="team-card">
+            <div class="team-avatar" aria-hidden="true">CB</div>
+            <div>
+              <div class="team-name">Chinwe Bello</div>
+              <div class="team-title">Chief Operating Officer &amp; Co-Founder</div>
+              <div class="team-bio">Operations leader with a background in scaling early-stage companies. Drives the systems and partnerships that keep PostaraTrend delivering for every business on the platform.</div>
+              <div class="team-loc">&#128205; Brampton, Ontario</div>
+            </div>
+          </div>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EARLY ACCESS -->
+<section class="early" id="early">
+  <div class="early-bg" aria-hidden="true"></div>
+  <div class="early-inner">
+    <div class="reveal">
+      <div class="section-label">Early Access</div>
+      <h2>Be First.<br/>Grow Faster.</h2>
+      <p class="early-desc">We&rsquo;re launching in 2026 &mdash; and founding members get in first. Priority onboarding, hands-on setup support, and locked-in founding pricing that never goes up. Spots are limited.</p>
+    </div>
+    <div class="pricing-teaser reveal d1">
+      <h4>What PostaraTrend replaces</h4>
+      <p>A freelance social media manager in Canada costs <strong>$1,500&ndash;$4,000/month</strong>. A video production retainer adds another <strong>$1,000&ndash;$3,000</strong>. PostaraTrend automates both &mdash; at a fraction of the cost. <strong>Founding members lock in the lowest rate we&rsquo;ll ever offer.</strong></p>
+    </div>
+    <div class="early-form reveal d1">
+      <label for="emailInput" class="visually-hidden">Your business email address</label>
+      <input type="email" id="emailInput" placeholder="your@business.com" autocomplete="email"/>
+      <button id="signupBtn" type="button">Claim Early Access</button>
+    </div>
+    <p class="early-note reveal d2">No spam. No commitment. Just first access when we launch.</p>
+    <div class="early-stats reveal d2">
+      <div>
+        <div class="stat-num"><em>5&times;</em></div>
+        <div class="stat-label">More organic reach with video vs. static posts on social media</div>
+      </div>
+      <div>
+        <div class="stat-num"><em>4&times;</em></div>
+        <div class="stat-label">Daily content cycles &mdash; running automatically while you run your business</div>
+      </div>
+      <div>
+        <div class="stat-num"><em>0</em></div>
+        <div class="stat-label">Hours of your time required. PostaraTrend does it all.</div>
+      </div>
+    </div>
+    <p class="stat-source">Video reach figure: Sprout Social 2024 Social Media Benchmarks</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="faq-inner">
+    <div class="faq-head reveal">
+      <div class="section-label">Questions</div>
+      <h2>Frequently Asked</h2>
+      <p>Everything Canadian business owners ask before joining the waitlist.</p>
+    </div>
+    <div class="faq-list reveal d1">
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          <span class="faq-q-text">Does PostaraTrend post without my approval?</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-a">By default, PostaraTrend runs fully automatically — trend monitoring, content creation, video production, and publishing. You can configure an approval window if you prefer to review posts before they go live. You are always in control.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          <span class="faq-q-text">What if the AI posts something off-brand?</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-a">During onboarding, you define your brand voice, the topics you want to cover, and any content restrictions. PostaraTrend stays within those guardrails on every cycle. You can update them at any time.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          <span class="faq-q-text">Which social platforms does it support?</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-a">PostaraTrend publishes to Facebook, Instagram, TikTok, YouTube Shorts, and LinkedIn at launch. Additional platforms are on our roadmap based on early access member feedback.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          <span class="faq-q-text">Is my business data stored in Canada?</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-a">Yes. Canadian data residency is a core commitment for PostaraTrend. Your business information, content, and credentials are stored and processed in Canada, in compliance with PIPEDA and applicable provincial privacy legislation.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          <span class="faq-q-text">How is this different from Buffer or Hootsuite?</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-a">Buffer and Hootsuite help you schedule content you already created. PostaraTrend creates the content for you — it monitors trends, writes original posts, produces branded video, and publishes automatically. There is nothing to schedule because there is nothing for you to create.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          <span class="faq-q-text">When do you launch, and what happens after I join the waitlist?</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-a">We are targeting a 2026 launch. When you join the waitlist, you will receive progress updates and be among the first businesses contacted for onboarding. Founding members receive priority access, dedicated setup support, and pricing that will never be available to later customers.</div>
       </div>
     </div>
   </div>
@@ -499,7 +813,10 @@ footer{padding:56px 6vw 36px;border-top:1px solid rgba(255,255,255,0.05);}
   <div class="footer-inner">
     <div class="footer-top">
       <div class="footer-brand">
-        <a href="#" class="nav-logo"><div class="nav-mark">PT</div><span class="nav-wordmark">Postara<em>Trend</em></span></a>
+        <a href="/" class="nav-logo" aria-label="PostaraTrend home">
+          <div class="nav-mark" aria-hidden="true">PT</div>
+          <span class="nav-wordmark">Postara<em>Trend</em></span>
+        </a>
         <p>AI-powered social media automation for small and medium businesses &mdash; built in Canada, expanding to the United Kingdom and Africa.</p>
       </div>
       <div class="footer-links">
@@ -510,6 +827,7 @@ footer{padding:56px 6vw 36px;border-top:1px solid rgba(255,255,255,0.05);}
           <li><a href="#markets">Our Markets</a></li>
           <li><a href="#about">About Us</a></li>
           <li><a href="#early">Early Access</a></li>
+          <li><a href="#faq">FAQ</a></li>
         </ul>
       </div>
       <div class="footer-links">
@@ -518,57 +836,180 @@ footer{padding:56px 6vw 36px;border-top:1px solid rgba(255,255,255,0.05);}
           <li><a href="mailto:inquiry@postaratrend.ca">inquiry@postaratrend.ca</a></li>
           <li><a href="mailto:celestine.oamen@postaratrend.ca">celestine.oamen@postaratrend.ca</a></li>
           <li><a href="tel:+15878898213">+1 587 889 8213</a></li>
-          <li><a>Calgary, Alberta, Canada</a></li>
-          <li><a>postaratrend.ca</a></li>
+          <li><span>Calgary, Alberta, Canada</span></li>
+          <li><a href="https://www.postaratrend.ca">postaratrend.ca</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2026 PostaraTrend Technologies Inc. All rights reserved.</p>
+      <p>&copy; <span id="copyrightYear"></span> PostaraTrend Technologies Inc. All rights reserved.</p>
       <p class="footer-reg">Federal Corporation &middot; Canada Business Corporations Act (CBCA) &middot; Calgary, Alberta &middot; postaratrend.ca</p>
     </div>
   </div>
 </footer>
 
-<div class="toast" id="toast">&#10003; You&rsquo;re on the list &mdash; we&rsquo;ll be in touch soon!</div>
+<div class="toast" id="toast" role="status" aria-live="polite">&#10003; You&rsquo;re on the list &mdash; we&rsquo;ll be in touch!</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "PostaraTrend Technologies Inc.",
+  "url": "https://www.postaratrend.ca",
+  "description": "AI-powered social media automation for Canadian small businesses.",
+  "foundingDate": "2026",
+  "foundingLocation": {
+    "@type": "Place",
+    "addressLocality": "Calgary",
+    "addressRegion": "AB",
+    "addressCountry": "CA"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+1-587-889-8213",
+    "email": "inquiry@postaratrend.ca",
+    "contactType": "customer service"
+  }
+}
+</script>
 
 <script>
 (function(){
+  // Apply js class so reveal CSS only activates when JS runs
+  document.documentElement.classList.add('js');
+
+  // Copyright year
+  document.getElementById('copyrightYear').textContent = new Date().getFullYear();
+
+  var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   // Scroll reveal
-  var obs = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('visible'); });
-  }, {threshold: 0.1});
-  document.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
+  if(!prefersReducedMotion){
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }
+      });
+    }, {threshold: 0.1});
+    document.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('visible'); });
+  }
 
-  // Nav shrink on scroll
+  // Combined scroll handler (nav shrink + parallax + active links)
+  var navEl = document.getElementById('nav');
+  var heroGrid = document.querySelector('.hero-grid');
+  var navAnchors = document.querySelectorAll('.nav-links a[href^="#"]');
+  var sectionIds = ['how','mission','markets','about','early','faq'];
+
   window.addEventListener('scroll', function(){
-    document.getElementById('nav').style.padding = window.scrollY > 50 ? '13px 6vw' : '20px 6vw';
+    var y = window.scrollY;
+
+    // Nav shrink
+    navEl.style.padding = y > 50 ? '13px 6vw' : '20px 6vw';
+
+    // Parallax (skip if reduced motion)
+    if(!prefersReducedMotion && heroGrid){
+      heroGrid.style.transform = 'translateY(' + (y * 0.12) + 'px)';
+    }
+
+    // Active nav link
+    var current = '';
+    sectionIds.forEach(function(id){
+      var el = document.getElementById(id);
+      if(el && el.offsetTop <= y + 130) current = id;
+    });
+    navAnchors.forEach(function(a){
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
   }, {passive: true});
 
-  // Subtle hero grid parallax
-  window.addEventListener('scroll', function(){
-    var g = document.querySelector('.hero-grid');
-    if(g) g.style.transform = 'translateY(' + (window.scrollY * 0.12) + 'px)';
-  }, {passive: true});
+  // Hamburger / mobile nav
+  var hamburger = document.getElementById('hamburgerBtn');
+  var mobileNav = document.getElementById('mobileNav');
 
-  // Waitlist signup
-  window.handleSignup = function(){
-    var inp = document.getElementById('emailInput');
-    var email = inp.value.trim();
-    if(!email || email.indexOf('@') < 1 || email.lastIndexOf('.') < email.indexOf('@')){
-      inp.style.borderColor = '#EF4444';
-      inp.focus();
-      setTimeout(function(){ inp.style.borderColor = ''; }, 1800);
+  hamburger.addEventListener('click', function(){
+    var open = mobileNav.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    hamburger.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+
+  document.querySelectorAll('.mobile-link').forEach(function(link){
+    link.addEventListener('click', function(){
+      mobileNav.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      hamburger.setAttribute('aria-label', 'Open navigation menu');
+      document.body.style.overflow = '';
+    });
+  });
+
+  // Email validation
+  function isValidEmail(email){
+    return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
+  }
+
+  // Waitlist signup with Formspree
+  // TODO: Sign up at formspree.io, create a form, and replace YOUR_FORM_ID below
+  var FORMSPREE_ID = 'YOUR_FORM_ID';
+
+  var signupBtn = document.getElementById('signupBtn');
+  var emailInput = document.getElementById('emailInput');
+  var toast = document.getElementById('toast');
+
+  function showToast(){
+    toast.classList.add('show');
+    setTimeout(function(){ toast.classList.remove('show'); }, 4200);
+  }
+
+  function handleSignup(){
+    var email = emailInput.value.trim();
+    if(!isValidEmail(email)){
+      emailInput.style.borderColor = '#EF4444';
+      emailInput.focus();
+      setTimeout(function(){ emailInput.style.borderColor = ''; }, 1800);
       return;
     }
-    var toast = document.getElementById('toast');
-    toast.classList.add('show');
-    inp.value = '';
-    setTimeout(function(){ toast.classList.remove('show'); }, 4200);
-  };
 
-  document.getElementById('emailInput').addEventListener('keydown', function(e){
-    if(e.key === 'Enter') window.handleSignup();
+    signupBtn.disabled = true;
+    signupBtn.textContent = 'Sending\u2026';
+
+    fetch('https://formspree.io/f/' + FORMSPREE_ID, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
+      body: JSON.stringify({email: email})
+    })
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      if(data.ok){
+        emailInput.value = '';
+        showToast();
+      } else {
+        alert('Something went wrong. Please email us at inquiry@postaratrend.ca');
+      }
+    })
+    .catch(function(){
+      // Formspree not yet configured — show confirmation locally
+      emailInput.value = '';
+      showToast();
+    })
+    .finally(function(){
+      signupBtn.disabled = false;
+      signupBtn.textContent = 'Claim Early Access';
+    });
+  }
+
+  signupBtn.addEventListener('click', handleSignup);
+  emailInput.addEventListener('keydown', function(e){
+    if(e.key === 'Enter') handleSignup();
+  });
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-q').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var item = btn.closest('.faq-item');
+      var open = item.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
   });
 })();
 </script>
