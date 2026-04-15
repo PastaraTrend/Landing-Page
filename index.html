@@ -4,17 +4,6 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>PostaraTrend — AI Social Media, On Autopilot</title>
-<meta name="description" content="AI-powered social media automation for Canadian SMBs. PostaraTrend creates original posts and branded video automatically, publishing every 6 hours."/>
-<meta property="og:title" content="PostaraTrend — AI Social Media, On Autopilot"/>
-<meta property="og:description" content="AI-powered social media automation for Canadian SMBs. PostaraTrend creates original posts and branded video automatically."/>
-<meta property="og:type" content="website"/>
-<meta property="og:url" content="https://postaratrend.ca"/>
-<meta property="og:image" content="https://postaratrend.ca/og-image.jpg"/>
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:title" content="PostaraTrend — AI Social Media, On Autopilot"/>
-<meta name="twitter:description" content="AI-powered social media automation for Canadian SMBs."/>
-<meta name="twitter:image" content="https://postaratrend.ca/og-image.jpg"/>
-<link rel="icon" type="image/x-icon" href="/favicon.ico"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet"/>
@@ -34,26 +23,6 @@ body{
   text-rendering:optimizeLegibility;
 }
 
-/* ACCESSIBILITY */
-.skip-link{
-  position:absolute;top:-100px;left:0;
-  background:var(--accent);color:var(--dark);
-  padding:10px 20px;z-index:9999;
-  text-decoration:none;font-weight:600;
-}
-.skip-link:focus{top:0;}
-*:focus-visible{
-  outline:2px solid var(--accent);
-  outline-offset:3px;
-}
-@media (prefers-reduced-motion: reduce){
-  *, *::before, *::after{
-    animation-duration:0.01ms !important;
-    animation-iteration-count:1 !important;
-    transition-duration:0.01ms !important;
-  }
-}
-
 /* NAV */
 nav{
   position:fixed;top:0;left:0;right:0;z-index:900;
@@ -64,50 +33,6 @@ nav{
   border-bottom:1px solid rgba(29,158,117,0.12);
   transition:padding 0.3s;
 }
-.mobile-menu-btn{
-  display:none;background:none;border:none;
-  color:white;font-size:24px;cursor:pointer;
-  padding:8px;width:40px;height:40px;
-  align-items:center;justify-content:center;
-}
-.mobile-menu{
-  position:fixed;top:0;right:-100%;
-  width:280px;height:100vh;
-  background:rgba(6,14,28,0.98);
-  backdrop-filter:blur(20px);
-  border-left:1px solid rgba(29,158,117,0.12);
-  padding:80px 30px 30px;
-  transition:right 0.3s ease;
-  z-index:899;
-}
-.mobile-menu.open{right:0;}
-.mobile-menu-close{
-  position:absolute;top:20px;right:20px;
-  background:none;border:none;color:white;
-  font-size:28px;cursor:pointer;padding:8px;
-}
-.mobile-menu nav{
-  position:static;background:none;
-  border:none;padding:0;flex-direction:column;
-  align-items:flex-start;gap:0;
-}
-.mobile-menu .nav-links{
-  display:flex;flex-direction:column;
-  gap:24px;width:100%;
-}
-.mobile-menu .nav-links a{
-  font-size:18px;padding:8px 0;
-  width:100%;border-bottom:1px solid rgba(255,255,255,0.05);
-}
-.mobile-menu .nav-cta{
-  margin-top:30px;display:block;text-align:center;
-}
-.mobile-overlay{
-  position:fixed;inset:0;
-  background:rgba(0,0,0,0.7);
-  z-index:898;display:none;
-}
-.mobile-overlay.show{display:block;}
 .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
 .nav-mark{
   width:36px;height:36px;border-radius:8px;
@@ -306,42 +231,13 @@ nav{
 .early-form input{flex:1;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:15px 18px;font-size:15px;color:white;outline:none;font-family:'DM Sans',sans-serif;transition:border-color 0.2s;}
 .early-form input::placeholder{color:rgba(255,255,255,0.25);}
 .early-form input:focus{border-color:var(--accent);}
-.early-form button{background:linear-gradient(135deg,var(--mid),var(--accent));color:white;border:none;border-radius:12px;padding:15px 24px;font-size:15px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap;transition:transform 0.2s,box-shadow 0.2s;box-shadow:0 8px 28px rgba(29,158,117,0.22);position:relative;}
-.early-form button:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 12px 44px rgba(29,158,117,0.38);}
-.early-form button:disabled{opacity:0.6;cursor:not-allowed;}
-.early-form button.loading::after{
-  content:'';position:absolute;right:12px;top:50%;
-  transform:translateY(-50%);width:14px;height:14px;
-  border:2px solid rgba(255,255,255,0.3);
-  border-top-color:white;border-radius:50%;
-  animation:spin 0.6s linear infinite;
-}
-@keyframes spin{to{transform:translateY(-50%) rotate(360deg);}}
-.form-error{
-  display:none;color:#EF4444;font-size:13px;
-  margin-top:8px;padding-left:4px;
-}
-.form-error.show{display:block;}
+.early-form button{background:linear-gradient(135deg,var(--mid),var(--accent));color:white;border:none;border-radius:12px;padding:15px 24px;font-size:15px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap;transition:transform 0.2s,box-shadow 0.2s;box-shadow:0 8px 28px rgba(29,158,117,0.22);}
+.early-form button:hover{transform:translateY(-2px);box-shadow:0 12px 44px rgba(29,158,117,0.38);}
 .early-note{font-size:12px;color:rgba(255,255,255,0.18);margin-top:14px;}
 .early-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:68px;padding-top:52px;border-top:1px solid rgba(255,255,255,0.07);}
 .stat-num{font-family:'Syne',sans-serif;font-size:36px;font-weight:800;color:#FFFFFF;margin-bottom:6px;letter-spacing:-1px;}
 .stat-num em{color:var(--accent);font-style:normal;}
 .stat-label{font-size:13px;color:rgba(255,255,255,0.32);font-weight:300;line-height:1.5;}
-
-/* TESTIMONIALS */
-.testimonials{padding:100px 6vw;background:rgba(255,255,255,0.012);}
-.testimonials-inner{max-width:1100px;margin:0 auto;text-align:center;}
-.testimonials h2{font-family:'Syne',sans-serif;font-size:clamp(26px,3.2vw,40px);font-weight:700;letter-spacing:-1px;color:#FFFFFF;margin-bottom:48px;}
-.testimonial-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:48px;}
-.testimonial{background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:28px 24px;text-align:left;transition:border-color 0.3s,transform 0.3s;}
-.testimonial:hover{border-color:rgba(29,158,117,0.28);transform:translateY(-4px);}
-.testimonial-quote{font-size:14px;color:rgba(255,255,255,0.58);line-height:1.75;margin-bottom:20px;font-style:italic;}
-.testimonial-author{display:flex;align-items:center;gap:12px;}
-.testimonial-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--navy),var(--teal));display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:white;}
-.testimonial-name{font-size:13px;font-weight:600;color:#FFFFFF;}
-.testimonial-title{font-size:11px;color:rgba(255,255,255,0.38);}
-.waitlist-count{display:inline-flex;align-items:center;gap:8px;background:rgba(29,158,117,0.1);border:1px solid rgba(29,158,117,0.28);border-radius:100px;padding:12px 24px;font-size:15px;color:var(--accent);font-weight:600;}
-.waitlist-count .count-num{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;margin-right:4px;}
 
 /* ABOUT */
 .about{padding:120px 6vw;background:rgba(255,255,255,0.012);border-top:1px solid rgba(255,255,255,0.05);}
@@ -386,14 +282,12 @@ footer{padding:56px 6vw 36px;border-top:1px solid rgba(255,255,255,0.05);}
 @media(max-width:900px){
   .problem-grid,.about-grid{grid-template-columns:1fr;gap:48px;}
   .steps{grid-template-columns:1fr 1fr;}
-  .mission-pillars,.market-cards,.testimonial-grid{grid-template-columns:1fr 1fr;}
+  .mission-pillars,.market-cards{grid-template-columns:1fr 1fr;}
   .ca-stats{grid-template-columns:1fr 1fr;}
-  nav .nav-links{display:none;}
-  nav .nav-cta{display:none;}
-  .mobile-menu-btn{display:flex;}
+  .nav-links{display:none;}
 }
 @media(max-width:600px){
-  .steps,.mission-pillars,.market-cards,.ca-stats,.early-stats,.testimonial-grid{grid-template-columns:1fr;}
+  .steps,.mission-pillars,.market-cards,.ca-stats,.early-stats{grid-template-columns:1fr;}
   .team-cards{grid-template-columns:1fr;}
   .early-form{flex-direction:column;}
   .footer-top{flex-direction:column;}
@@ -404,31 +298,10 @@ footer{padding:56px 6vw 36px;border-top:1px solid rgba(255,255,255,0.05);}
 </head>
 <body>
 
-<!-- SKIP LINK -->
-<a href="#main" class="skip-link">Skip to main content</a>
-
-<!-- MOBILE OVERLAY -->
-<div class="mobile-overlay" id="mobileOverlay" onclick="closeMobileMenu()"></div>
-
-<!-- MOBILE MENU -->
-<div class="mobile-menu" id="mobileMenu">
-  <button class="mobile-menu-close" onclick="closeMobileMenu()" aria-label="Close menu">&times;</button>
-  <nav aria-label="Mobile navigation">
-    <div class="nav-links">
-      <a href="#how" onclick="closeMobileMenu()">How It Works</a>
-      <a href="#mission" onclick="closeMobileMenu()">Mission</a>
-      <a href="#markets" onclick="closeMobileMenu()">Markets</a>
-      <a href="#about" onclick="closeMobileMenu()">About</a>
-      <a href="#early" onclick="closeMobileMenu()">Early Access</a>
-    </div>
-    <a href="#early" class="nav-cta" onclick="closeMobileMenu()">Get Early Access</a>
-  </nav>
-</div>
-
 <!-- NAV -->
-<nav id="nav" aria-label="Main navigation">
-  <a href="#" class="nav-logo" aria-label="PostaraTrend home">
-    <div class="nav-mark" aria-hidden="true">PT</div>
+<nav id="nav">
+  <a href="#" class="nav-logo">
+    <div class="nav-mark">PT</div>
     <span class="nav-wordmark">Postara<em>Trend</em></span>
   </a>
   <div class="nav-links">
@@ -439,28 +312,27 @@ footer{padding:56px 6vw 36px;border-top:1px solid rgba(255,255,255,0.05);}
     <a href="#early">Early Access</a>
   </div>
   <a href="#early" class="nav-cta">Get Early Access</a>
-  <button class="mobile-menu-btn" onclick="openMobileMenu()" aria-label="Open menu" aria-expanded="false">&#9776;</button>
 </nav>
 
 <!-- HERO -->
-<section class="hero" id="main">
-  <div class="hero-bg" aria-hidden="true"></div>
-  <div class="hero-grid" aria-hidden="true"></div>
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
   <div class="hero-content">
-    <div class="hero-badge"><span class="badge-dot" aria-hidden="true"></span>Built in Canada &middot; Launching 2026</div>
+    <div class="hero-badge"><span class="badge-dot"></span>Built in Canada &middot; Launching 2026</div>
     <h1>Your Business.<br/><span class="accent-line">Always Trending.</span></h1>
-    <p class="hero-tagline">AI-powered social media for businesses that mean business.</p>
-    <p class="hero-sub">Monitors trending topics, creates <strong>original posts and branded video</strong>, and auto-publishes every six hours—zero effort required.</p>
+    <p class="hero-tagline">AI-powered social media &mdash; for Canadian businesses that mean business.</p>
+    <p class="hero-sub">PostaraTrend monitors what is trending in your industry, creates <strong>original posts and branded video</strong>, and publishes to all your social media pages automatically &mdash; every six hours, every day, without any effort from you.</p>
     <div class="hero-actions">
       <a href="#early" class="btn-primary">Join the Waitlist</a>
       <a href="#how" class="btn-ghost">See How It Works &rarr;</a>
     </div>
     <div class="hero-ca-tag">
-      <span aria-hidden="true">&#127809;</span>&nbsp;
+      <span>&#127809;</span>&nbsp;
       <span>Federally incorporated &middot; Canada Business Corporations Act &middot; Calgary, Alberta</span>
     </div>
   </div>
-  <div class="hero-scroll" aria-hidden="true"><div class="scroll-line"></div>scroll</div>
+  <div class="hero-scroll"><div class="scroll-line"></div>scroll</div>
 </section>
 
 <!-- CANADIAN MARKET BAND -->
@@ -581,78 +453,22 @@ footer{padding:56px 6vw 36px;border-top:1px solid rgba(255,255,255,0.05);}
 
 <!-- EARLY ACCESS -->
 <section class="early" id="early">
-  <div class="early-bg" aria-hidden="true"></div>
+  <div class="early-bg"></div>
   <div class="early-inner">
     <div class="reveal">
       <div class="section-label">Early Access</div>
       <h2>Be First.<br/>Grow Faster.</h2>
-      <p class="early-desc">PostaraTrend is currently in development. Join the waitlist today and be among the first businesses on the platform—with priority onboarding, dedicated setup support, and founding-member pricing.</p>
+      <p class="early-desc">PostaraTrend is currently in development. Join the waitlist today and be among the first Canadian businesses on the platform &mdash; with priority onboarding, dedicated setup support, and founding-member pricing.</p>
     </div>
-    <form class="early-form reveal d1" onsubmit="handleSignup(event)" novalidate>
-      <div style="flex:1;">
-        <input
-          type="email"
-          id="emailInput"
-          name="email"
-          placeholder="your@business.com"
-          autocomplete="email"
-          required
-          aria-describedby="email-error"
-          aria-invalid="false"/>
-        <div id="email-error" class="form-error" role="alert"></div>
-      </div>
-      <button type="submit" id="submitBtn">Join Waitlist</button>
-    </form>
+    <div class="early-form reveal d1">
+      <input type="email" id="emailInput" placeholder="your@business.com" autocomplete="email"/>
+      <button onclick="handleSignup()">Join Waitlist</button>
+    </div>
     <p class="early-note reveal d2">No spam. No commitment. Just first access when we launch.</p>
     <div class="early-stats reveal d2">
       <div><div class="stat-num"><em>5&times;</em></div><div class="stat-label">More organic reach with video vs. static posts on social media</div></div>
       <div><div class="stat-num"><em>4&times;</em></div><div class="stat-label">Daily content cycles &mdash; running automatically while you run your business</div></div>
       <div><div class="stat-num"><em>0</em></div><div class="stat-label">Hours of your time required. PostaraTrend does it all.</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- TESTIMONIALS -->
-<section class="testimonials">
-  <div class="testimonials-inner">
-    <div class="reveal">
-      <div class="section-label">What Early Testers Are Saying</div>
-      <h2>Trusted by forward-thinking business owners</h2>
-    </div>
-    <div class="testimonial-grid reveal d1">
-      <div class="testimonial">
-        <p class="testimonial-quote">"As a restaurant owner, I barely have time to think about Instagram. PostaraTrend keeps us visible and relevant without adding another task to my day."</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">JM</div>
-          <div>
-            <div class="testimonial-name">Jessica Martinez</div>
-            <div class="testimonial-title">Owner, Terra Kitchen • Toronto</div>
-          </div>
-        </div>
-      </div>
-      <div class="testimonial">
-        <p class="testimonial-quote">"The video content looks professional—way better than what I could produce myself. My engagement is up 40% since joining the beta."</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">RP</div>
-          <div>
-            <div class="testimonial-name">Rajesh Patel</div>
-            <div class="testimonial-title">Founder, PrimeHome Renovations • Brampton</div>
-          </div>
-        </div>
-      </div>
-      <div class="testimonial">
-        <p class="testimonial-quote">"I love that it actually tracks what's trending in my niche. Every post feels timely and relevant, not generic like other tools."</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">SK</div>
-          <div>
-            <div class="testimonial-name">Sarah Kim</div>
-            <div class="testimonial-title">Owner, Bloom Wellness Studio • Calgary</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="waitlist-count reveal d2">
-      <span class="count-num">2,400+</span> businesses have joined the waitlist
     </div>
   </div>
 </section>
@@ -735,96 +551,25 @@ footer{padding:56px 6vw 36px;border-top:1px solid rgba(255,255,255,0.05);}
     if(g) g.style.transform = 'translateY(' + (window.scrollY * 0.12) + 'px)';
   }, {passive: true});
 
-  // Mobile menu functions
-  window.openMobileMenu = function(){
-    var menu = document.getElementById('mobileMenu');
-    var overlay = document.getElementById('mobileOverlay');
-    var btn = document.querySelector('.mobile-menu-btn');
-    menu.classList.add('open');
-    overlay.classList.add('show');
-    if(btn) btn.setAttribute('aria-expanded', 'true');
-    document.body.style.overflow = 'hidden';
-  };
-
-  window.closeMobileMenu = function(){
-    var menu = document.getElementById('mobileMenu');
-    var overlay = document.getElementById('mobileOverlay');
-    var btn = document.querySelector('.mobile-menu-btn');
-    menu.classList.remove('open');
-    overlay.classList.remove('show');
-    if(btn) btn.setAttribute('aria-expanded', 'false');
-    document.body.style.overflow = '';
-  };
-
-  // Improved form validation
-  function validateEmail(email){
-    var re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
-  }
-
-  function showError(message){
-    var errorEl = document.getElementById('email-error');
-    var input = document.getElementById('emailInput');
-    errorEl.textContent = message;
-    errorEl.classList.add('show');
-    input.style.borderColor = '#EF4444';
-    input.setAttribute('aria-invalid', 'true');
-  }
-
-  function clearError(){
-    var errorEl = document.getElementById('email-error');
-    var input = document.getElementById('emailInput');
-    errorEl.classList.remove('show');
-    input.style.borderColor = '';
-    input.setAttribute('aria-invalid', 'false');
-  }
-
   // Waitlist signup
-  window.handleSignup = function(e){
-    if(e) e.preventDefault();
-
+  window.handleSignup = function(){
     var inp = document.getElementById('emailInput');
-    var btn = document.getElementById('submitBtn');
     var email = inp.value.trim();
-
-    clearError();
-
-    if(!email){
-      showError('Please enter your email address');
+    if(!email || email.indexOf('@') < 1 || email.lastIndexOf('.') < email.indexOf('@')){
+      inp.style.borderColor = '#EF4444';
       inp.focus();
-      return false;
+      setTimeout(function(){ inp.style.borderColor = ''; }, 1800);
+      return;
     }
-
-    if(!validateEmail(email)){
-      showError('Please enter a valid email address');
-      inp.focus();
-      return false;
-    }
-
-    // Show loading state
-    btn.classList.add('loading');
-    btn.disabled = true;
-    btn.textContent = 'Joining...';
-
-    // Simulate API call
-    setTimeout(function(){
-      btn.classList.remove('loading');
-      btn.disabled = false;
-      btn.textContent = 'Join Waitlist';
-
-      var toast = document.getElementById('toast');
-      toast.classList.add('show');
-      inp.value = '';
-      clearError();
-
-      setTimeout(function(){ toast.classList.remove('show'); }, 4200);
-    }, 1200);
-
-    return false;
+    var toast = document.getElementById('toast');
+    toast.classList.add('show');
+    inp.value = '';
+    setTimeout(function(){ toast.classList.remove('show'); }, 4200);
   };
 
-  // Clear error on input
-  document.getElementById('emailInput').addEventListener('input', clearError);
+  document.getElementById('emailInput').addEventListener('keydown', function(e){
+    if(e.key === 'Enter') window.handleSignup();
+  });
 })();
 </script>
 </body>
