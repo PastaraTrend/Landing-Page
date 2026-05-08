@@ -55,11 +55,8 @@
   }
   .brand-logo {
     width: 44px; height: 44px;
-    border-radius: 10px;
-    background: linear-gradient(135deg, var(--navy) 0%, var(--teal) 100%);
-    display: flex; align-items: center; justify-content: center;
-    color: white; font-weight: 700; font-size: 16px;
     flex-shrink: 0;
+    display: block;
   }
   .brand-text { display: flex; flex-direction: column; }
   .brand-name {
@@ -289,7 +286,7 @@
   @media (max-width: 600px) {
     .page { padding: 24px 18px 60px 18px; }
     header { gap: 10px; padding-bottom: 18px; margin-bottom: 24px; }
-    .brand-logo { width: 38px; height: 38px; font-size: 14px; }
+    .brand-logo { width: 38px; height: 38px; }
     .brand-name { font-size: 16px; }
     .hero-title { font-size: 24px; }
     .hero-intro { font-size: 15px; }
@@ -307,7 +304,14 @@
 
   <!-- ============= HEADER ============= -->
   <header>
-    <div class="brand-logo">PT</div>
+    <svg class="brand-logo" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <rect width="120" height="120" rx="24" fill="#1A3A6B"/>
+      <rect x="20" y="70" width="16" height="30" rx="3" fill="#5DCAA5"/>
+      <rect x="42" y="50" width="16" height="50" rx="3" fill="#1D9E75"/>
+      <rect x="64" y="30" width="16" height="70" rx="3" fill="#0F6E56"/>
+      <rect x="86" y="14" width="16" height="86" rx="3" fill="#FFF"/>
+      <polygon points="94,10 84,18 104,18" fill="#0F6E56"/>
+    </svg>
     <div class="brand-text">
       <div class="brand-name">PostaraTrend Technologies Inc.</div>
       <div class="brand-tag">Trend intelligence for the digital age</div>
