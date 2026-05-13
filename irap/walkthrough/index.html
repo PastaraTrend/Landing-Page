@@ -2,20 +2,21 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PostaraTrend — D1–D4 Walkthrough (Short)</title>
 <style>
+
   :root {
     --navy: #1a3a6b;
     --navy-deep: #0e2841;
     --emerald: #1d9e75;
-    --emerald-soft: #d4f0e3;
+    --emerald-soft: #e8f5ee;
+    --teal: #308888;
     --amber: #f0a020;
     --amber-soft: #fff4d4;
     --coral: #e85d4f;
     --coral-soft: #fbe0dc;
-    --teal: #308888;
-    --teal-soft: #d4ecec;
     --bg: #f7f8fa;
     --surface: #ffffff;
     --border: #e1e5ec;
@@ -25,8 +26,8 @@
     --text-faint: #8b95a8;
     --shadow: 0 1px 3px rgba(15, 23, 42, 0.06), 0 4px 12px rgba(15, 23, 42, 0.04);
     --shadow-lg: 0 4px 14px rgba(15, 23, 42, 0.08), 0 18px 48px rgba(15, 23, 42, 0.10);
-    --radius: 10px;
-    --radius-sm: 6px;
+    --radius: 12px;
+    --radius-sm: 8px;
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
@@ -34,87 +35,178 @@
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     background: var(--bg);
     color: var(--text);
-    line-height: 1.5;
+    line-height: 1.55;
     min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* Reserve space at bottom for sticky player */
+    padding-bottom: 120px;
   }
 
-  /* ===== layout shell ===== */
-  .app { display: grid; grid-template-columns: 320px 1fr; min-height: 100vh; }
-  @media (max-width: 980px) { .app { grid-template-columns: 1fr; } }
-
-  /* ===== left rail ===== */
-  .rail {
-    background: var(--surface);
-    border-right: 1px solid var(--border);
-    padding: 20px 18px;
-    overflow-y: auto;
-    max-height: 100vh;
-    position: sticky;
-    top: 0;
+  .page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 24px 24px 24px;
   }
-  .brand {
-    display: flex; align-items: center; gap: 10px;
-    padding-bottom: 14px; margin-bottom: 16px;
+
+  /* ============== HEADER (mirrors resources page) ============== */
+  header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding-bottom: 22px;
     border-bottom: 1px solid var(--border);
+    margin-bottom: 28px;
   }
-  .brand-logo {
-    width: 36px; height: 36px; border-radius: 8px;
-    object-fit: cover; flex-shrink: 0;
-    background: var(--surface);
-    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.08);
-  }
-  .brand-name { font-size: 14px; font-weight: 700; color: var(--navy); letter-spacing: -0.01em; }
-  .brand-tag { font-size: 11px; color: var(--text-faint); }
+  .brand-logo { width: 44px; height: 44px; flex-shrink: 0; display: block; }
+  .brand-text { display: flex; flex-direction: column; }
+  .brand-name { font-size: 18px; font-weight: 700; color: var(--navy); letter-spacing: -0.01em; }
+  .brand-tag { font-size: 12px; color: var(--text-muted); font-style: italic; }
 
-  .rail h2 {
-    font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
-    color: var(--text-muted); text-transform: uppercase;
-    margin: 16px 0 8px 0;
+  /* ============== BACK LINK ============== */
+  .back-link {
+    margin-bottom: 20px;
+    font-size: 13px;
   }
+  .back-link a {
+    color: var(--text-muted); text-decoration: none;
+    display: inline-flex; align-items: center; gap: 6px;
+    transition: color 0.15s;
+  }
+  .back-link a:hover { color: var(--navy); }
 
-  .scene-list { list-style: none; padding: 0; margin: 0; }
-  .scene-list li {
-    padding: 9px 11px; margin-bottom: 3px; cursor: pointer;
+  /* ============== HERO (static walkthrough intro) ============== */
+  .hero { margin-bottom: 20px; }
+  .hero-eyebrow {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+    color: var(--emerald); text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .hero-title {
+    font-size: 28px; font-weight: 700; color: var(--navy);
+    letter-spacing: -0.02em; line-height: 1.25;
+    margin: 0 0 12px 0;
+  }
+  .hero-intro {
+    font-size: 15px; color: var(--text); line-height: 1.65;
+    margin: 0; max-width: 860px;
+  }
+  .hero-actions {
+    display: flex; gap: 10px; flex-wrap: wrap;
+    margin-top: 16px;
+  }
+  .hero-action {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 9px 16px; border-radius: var(--radius-sm);
+    border: 1px solid var(--border-strong);
+    background: var(--surface); color: var(--navy);
+    font-size: 13px; font-weight: 600; text-decoration: none;
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+  }
+  .hero-action:hover { background: var(--bg); border-color: var(--navy); }
+  .hero-action svg { width: 13px; height: 13px; flex-shrink: 0; }
+
+  /* ============== ADVISORY NOTE (mirrors resources page) ============== */
+  .advisory {
+    background: var(--amber-soft);
+    border: 1px solid var(--amber);
+    border-left-width: 4px;
     border-radius: var(--radius-sm);
-    font-size: 13px; color: var(--text-muted);
-    display: flex; align-items: center; gap: 8px;
-    transition: background 0.15s, color 0.15s;
+    padding: 14px 18px;
+    margin: 24px 0 8px 0;
+    font-size: 13px;
+    color: var(--text);
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    line-height: 1.6;
   }
-  .scene-list li:hover { background: rgba(26, 58, 107, 0.05); color: var(--text); }
-  .scene-list li.active { background: var(--navy); color: white; font-weight: 600; }
-  .scene-list li.active .scene-num { background: rgba(255,255,255,0.2); color: white; }
-  .scene-list li.played { color: var(--emerald); }
-  .scene-num {
-    width: 22px; height: 22px; flex: 0 0 22px;
-    border-radius: 50%; background: var(--bg);
+  .advisory-icon {
+    flex-shrink: 0;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: var(--amber);
+    color: white;
     display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 12px;
+  }
+  .advisory strong { color: var(--navy); }
+  .advisory a { color: var(--navy); font-weight: 600; }
+
+  /* ============== SECTION NAV (horizontal pills) ============== */
+  .section-nav {
+    margin: 28px 0 20px 0;
+    padding-top: 22px;
+    border-top: 1px solid var(--border);
+  }
+  .section-nav-label {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+    color: var(--text-muted); text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .scene-list {
+    list-style: none; padding: 0; margin: 0;
+    display: flex; flex-wrap: wrap; gap: 7px;
+  }
+  .scene-list li {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 7px 13px;
+    border-radius: 999px;
+    border: 1px solid var(--border-strong);
+    background: var(--surface);
+    cursor: pointer;
+    font-size: 12.5px;
+    color: var(--text-muted);
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+    line-height: 1.3;
+  }
+  .scene-list li:hover {
+    background: var(--bg); color: var(--text); border-color: var(--navy);
+  }
+  .scene-list li.active {
+    background: var(--navy); color: white; border-color: var(--navy);
+    font-weight: 600;
+  }
+  .scene-list li.played {
+    color: var(--emerald); border-color: var(--emerald);
+  }
+  .scene-list li.active .scene-num { background: rgba(255,255,255,0.22); color: white; }
+  .scene-num {
+    width: 18px; height: 18px; flex: 0 0 18px;
+    border-radius: 50%; background: var(--bg);
+    display: inline-flex; align-items: center; justify-content: center;
     font-size: 10px; font-weight: 700; color: var(--text-muted);
   }
-  .scene-title { flex: 1; line-height: 1.3; }
 
-  /* ===== main stage ===== */
-  .stage {
-    padding: 24px 28px 120px 28px;
-    display: flex; flex-direction: column; gap: 16px;
-  }
+  /* ============== DYNAMIC SCENE HEADER ============== */
   .stage-header {
-    display: flex; flex-direction: column; gap: 4px;
-    padding-bottom: 14px; border-bottom: 1px solid var(--border);
+    margin: 24px 0 12px 0;
   }
-  .stage-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; color: var(--emerald); text-transform: uppercase; }
-  .stage-title { font-size: 22px; font-weight: 700; color: var(--navy); letter-spacing: -0.01em; margin: 0; }
-  .stage-sub { font-size: 13px; color: var(--text-muted); }
+  .stage-eyebrow {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+    color: var(--text-muted); text-transform: uppercase;
+  }
+  .stage-title {
+    font-size: 22px; font-weight: 700; color: var(--navy);
+    letter-spacing: -0.01em; margin: 4px 0 0 0;
+  }
 
-  /* ===== diagram canvas ===== */
+  /* ============== DIAGRAM CANVAS ============== */
   .canvas-wrap {
-    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
-    padding: 16px; position: relative; box-shadow: var(--shadow);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px;
+    position: relative;
+    box-shadow: var(--shadow);
+    margin-bottom: 16px;
   }
   .scene-label {
-    position: absolute; top: 12px; left: 16px;
+    position: absolute; top: 12px; left: 18px;
     font-size: 11px; font-weight: 700; letter-spacing: 0.05em;
-    color: var(--text-faint); text-transform: uppercase; z-index: 5;
-    background: rgba(255,255,255,0.9); padding: 2px 8px; border-radius: 4px;
+    color: var(--text-faint); text-transform: uppercase;
+    background: rgba(255,255,255,0.92);
+    padding: 2px 8px; border-radius: 4px; z-index: 5;
   }
   svg.diagram { width: 100%; height: auto; display: block; max-height: 70vh; }
 
@@ -124,53 +216,153 @@
   .focused { opacity: 1; }
   .focused .node-fill { filter: drop-shadow(0 0 12px rgba(232, 93, 79, 0.55)); }
   .arrow-pointer { transition: opacity 0.3s ease; }
-
-  /* arrow pulse */
   @keyframes arrowFloat {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-6px); }
   }
   .arrow-pointer.active { animation: arrowFloat 1.4s ease-in-out infinite; }
+  /* SVG visibility — selectors must match svg.diagram specificity to win */
+  svg.scene-svg { display: none; }
+  svg.scene-svg.shown { display: block; }
 
-  /* ===== caption ribbon ===== */
+  /* ============== CAPTION RIBBON ============== */
   .caption {
     background: linear-gradient(180deg, var(--navy-deep) 0%, var(--navy) 100%);
     color: white; border-radius: var(--radius); padding: 18px 22px;
     box-shadow: var(--shadow-lg); position: relative; min-height: 80px;
     display: flex; flex-direction: column; gap: 6px;
+    margin-bottom: 22px;
   }
-  .caption-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; color: rgba(255,255,255,0.65); text-transform: uppercase; }
-  .caption-text { font-size: 15px; line-height: 1.55; color: white; }
-  .caption-text .word-active {
-    background: var(--amber);
-    color: var(--navy-deep);
-    padding: 1px 4px; border-radius: 3px; font-weight: 600;
+  .caption-eyebrow {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
+    color: rgba(255,255,255,0.65); text-transform: uppercase;
   }
+  .caption-text { font-size: 15px; line-height: 1.6; color: white; }
   .caption-progress {
     position: absolute; bottom: 0; left: 0; height: 3px;
     background: var(--emerald); border-radius: 0 0 var(--radius) var(--radius);
     transition: width 0.3s linear; max-width: 100%;
   }
 
-  /* ===== player bar ===== */
+  /* ============== COMPANION DOCUMENTS (mirrors resources page) ============== */
+  h2.section {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+    color: var(--text-muted); text-transform: uppercase;
+    margin: 40px 0 16px 0;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .docs-list {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 6px 0;
+    box-shadow: var(--shadow);
+  }
+  .doc-item {
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 22px;
+    text-decoration: none;
+    color: var(--text);
+    border-bottom: 1px solid var(--border);
+    transition: background 0.12s;
+  }
+  .doc-item:last-child { border-bottom: none; }
+  .doc-item:hover { background: var(--bg); }
+  .doc-item.current { background: var(--emerald-soft); }
+  .doc-item.current:hover { background: var(--emerald-soft); }
+  .doc-icon {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    background: var(--emerald-soft);
+    color: var(--emerald);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 11px; flex-shrink: 0;
+  }
+  .doc-info { flex: 1; min-width: 0; }
+  .doc-title {
+    font-size: 14px; font-weight: 600; color: var(--navy); margin: 0;
+  }
+  .doc-meta { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+  .doc-current-pill {
+    display: inline-block;
+    background: var(--emerald); color: white;
+    font-size: 9px; font-weight: 700; letter-spacing: 0.08em;
+    padding: 2px 8px; border-radius: 999px; text-transform: uppercase;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+  .doc-arrow { color: var(--text-faint); font-size: 18px; flex-shrink: 0; }
+
+  /* ============== FOOTER (mirrors resources page) ============== */
+  footer {
+    margin-top: 36px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+  footer a {
+    color: var(--text-muted); text-decoration: none;
+    border-bottom: 1px dotted var(--text-faint);
+  }
+  footer a:hover { color: var(--navy); border-bottom-color: var(--navy); }
+  .footer-divider { color: var(--text-faint); margin: 0 6px; }
+
+  /* ============== PLAYER (sticky bottom) ============== */
   .player {
-    position: fixed; bottom: 0; left: 320px; right: 0;
+    position: fixed; bottom: 0; left: 0; right: 0;
     background: var(--surface); border-top: 1px solid var(--border-strong);
-    padding: 10px 28px 14px 28px;
+    padding: 10px 24px 14px 24px;
     display: flex; flex-direction: column; gap: 8px;
     box-shadow: 0 -4px 12px rgba(15,23,42,0.06); z-index: 100;
   }
-  .player-bottom { display: flex; align-items: center; gap: 16px; }
-  @media (max-width: 980px) { .player { left: 0; } }
-  @media (max-width: 600px) {
-    .player { padding: 8px 14px 12px 14px; }
-    .player-bottom { gap: 8px; flex-wrap: wrap; }
+  .player-inner {
+    max-width: 1200px; margin: 0 auto; width: 100%;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .player-bottom { display: flex; align-items: center; gap: 14px; }
+  .player button {
+    border: 1px solid var(--border-strong); background: var(--surface); color: var(--navy);
+    border-radius: var(--radius-sm); padding: 8px 14px; font-size: 13px; font-weight: 600;
+    cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+  }
+  .player button:hover:not(:disabled) { background: var(--navy); color: white; border-color: var(--navy); }
+  .player button:disabled { opacity: 0.4; cursor: not-allowed; }
+  .player button.primary {
+    background: var(--navy); color: white; border-color: var(--navy);
+    padding: 10px 18px;
+  }
+  .player button.primary:hover { background: var(--emerald); border-color: var(--emerald); }
+  .player-info { flex: 1; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .player-scene {
+    font-size: 13px; font-weight: 700; color: var(--navy);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .player-status { font-size: 11px; color: var(--text-muted); }
+  .player-controls { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .speed-pill {
+    background: var(--bg); border: 1px solid var(--border-strong); border-radius: 999px;
+    padding: 6px 12px; font-size: 11px; font-weight: 700; color: var(--navy);
+    cursor: pointer; user-select: none;
+  }
+  .speed-pill:hover { background: var(--navy); color: white; border-color: var(--navy); }
+  .voice-trigger {
+    border: 1px solid var(--border-strong); background: var(--surface); color: var(--navy);
+    border-radius: var(--radius-sm); padding: 8px 12px; font-size: 12px; font-weight: 600;
+    cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
+  }
+  .voice-trigger:hover { background: var(--bg); border-color: var(--navy); }
+  .voice-label-inline {
+    font-size: 11px; color: var(--text-muted);
+    max-width: 180px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
   }
 
-  /* ===== scrubber ===== */
-  .scrubber-row {
-    display: flex; align-items: center; gap: 12px; width: 100%;
-  }
+  /* ============== SCRUBBER ============== */
+  .scrubber-row { display: flex; align-items: center; gap: 12px; width: 100%; }
   .scrubber-track {
     flex: 1; position: relative; height: 22px;
     cursor: pointer; touch-action: none;
@@ -185,8 +377,7 @@
     position: absolute; left: 0; top: 50%;
     height: 4px; transform: translateY(-50%);
     background: linear-gradient(90deg, var(--emerald) 0%, var(--teal) 100%);
-    border-radius: 2px; width: 0%;
-    pointer-events: none;
+    border-radius: 2px; width: 0%; pointer-events: none;
     transition: width 0.12s linear;
   }
   .scrubber-ticks { position: absolute; inset: 0; pointer-events: none; }
@@ -213,46 +404,18 @@
     min-width: 50px; text-align: right; user-select: none;
   }
 
-  .player button {
-    border: 1px solid var(--border-strong); background: var(--surface); color: var(--navy);
-    border-radius: var(--radius-sm); padding: 8px 14px; font-size: 13px; font-weight: 600;
-    cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
-    transition: background 0.15s, border-color 0.15s, color 0.15s;
-  }
-  .player button:hover:not(:disabled) { background: var(--navy); color: white; border-color: var(--navy); }
-  .player button:disabled { opacity: 0.4; cursor: not-allowed; }
-  .player button.primary {
-    background: var(--navy); color: white; border-color: var(--navy);
-    padding: 10px 18px;
-  }
-  .player button.primary:hover { background: var(--emerald); border-color: var(--emerald); }
-
-  .player-info { flex: 1; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
-  .player-scene { font-size: 13px; font-weight: 700; color: var(--navy); }
-  .player-status { font-size: 11px; color: var(--text-muted); }
-
-  .player-controls { display: flex; gap: 8px; align-items: center; }
-  select {
-    border: 1px solid var(--border-strong); border-radius: var(--radius-sm);
-    padding: 6px 8px; font-size: 12px; color: var(--text); background: var(--surface);
-    max-width: 200px;
-  }
-  .speed-pill {
-    background: var(--bg); border: 1px solid var(--border-strong); border-radius: 999px;
-    padding: 4px 10px; font-size: 11px; font-weight: 700; color: var(--navy);
-    cursor: pointer; user-select: none;
-  }
-  .speed-pill:hover { background: var(--navy); color: white; border-color: var(--navy); }
-
-  /* ===== modal voice picker ===== */
+  /* ============== VOICE PICKER MODAL ============== */
   .modal-bg {
     position: fixed; inset: 0; background: rgba(15, 23, 42, 0.5);
     display: none; align-items: center; justify-content: center; z-index: 1000;
+    padding: 20px;
   }
   .modal-bg.shown { display: flex; }
   .modal {
-    background: var(--surface); border-radius: var(--radius); max-width: 540px; width: 92%;
-    max-height: 80vh; overflow-y: auto; box-shadow: var(--shadow-lg); padding: 24px;
+    background: var(--surface); border-radius: var(--radius);
+    max-width: 540px; width: 100%;
+    max-height: 80vh; overflow-y: auto;
+    box-shadow: var(--shadow-lg); padding: 24px;
   }
   .modal h3 { margin-top: 0; color: var(--navy); }
   .voice-list { list-style: none; padding: 0; margin: 12px 0; }
@@ -268,77 +431,193 @@
   .voice-meta { font-size: 11px; color: var(--text-muted); }
   .modal-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 12px; }
 
-  /* ===== inactive scene styling ===== */
-  .scene-svg { display: none; }
-  .scene-svg.shown { display: block; }
+  /* ============== MOBILE ============== */
+  @media (max-width: 720px) {
+    .page { padding: 24px 16px 16px 16px; }
+    body { padding-bottom: 150px; }
+    header { gap: 10px; padding-bottom: 18px; margin-bottom: 20px; }
+    .brand-logo { width: 38px; height: 38px; }
+    .brand-name { font-size: 15px; }
+    .brand-tag { font-size: 11px; }
+    .hero-title { font-size: 22px; }
+    .hero-intro { font-size: 14px; }
+    .stage-title { font-size: 18px; }
+    .canvas-wrap { padding: 12px; }
+    .caption { padding: 14px 16px; font-size: 14px; }
+    .caption-text { font-size: 14px; }
+    .player { padding: 8px 14px 12px 14px; }
+    .player-bottom { gap: 8px; flex-wrap: wrap; }
+    .player-info { flex-basis: 100%; }
+    .player-controls { width: 100%; justify-content: space-between; }
+    .voice-trigger { padding: 6px 10px; font-size: 11px; }
+    .voice-label-inline { display: none; }
+  }
+
 </style>
 </head>
 <body>
 
-<div class="app">
+<div class="page">
 
-  <!-- ============= LEFT RAIL ============= -->
-  <aside class="rail">
-    <div class="brand">
-      <img class="brand-logo" src="data:image/jpeg;base64,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" alt="PostaraTrend logo">
-      <div>
-        <div class="brand-name">PostaraTrend</div>
-        <div class="brand-tag">D1–D4 Walkthrough</div>
-      </div>
+  <!-- BRAND HEADER -->
+  <header>
+    <svg class="brand-logo" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <rect width="120" height="120" rx="24" fill="#1A3A6B"/>
+  <rect x="20" y="70" width="16" height="30" rx="3" fill="#5DCAA5"/>
+  <rect x="42" y="50" width="16" height="50" rx="3" fill="#1D9E75"/>
+  <rect x="64" y="30" width="16" height="70" rx="3" fill="#0F6E56"/>
+  <rect x="86" y="14" width="16" height="86" rx="3" fill="#FFF"/>
+  <polygon points="94,10 84,18 104,18" fill="#0F6E56"/>
+</svg>
+    <div class="brand-text">
+      <div class="brand-name">PostaraTrend Technologies Inc.</div>
+      <div class="brand-tag">Trend intelligence for the digital age</div>
     </div>
+  </header>
 
-    <h2>Sections</h2>
+  <!-- BACK LINK -->
+  <div class="back-link">
+    <a href="../">← Back to walkthrough resources</a>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-eyebrow">IRAP Application — Technical Walkthrough</div>
+    <h1 class="hero-title">D1–D4 Walkthrough — The Four R&amp;D Uncertainties</h1>
+    <p class="hero-intro">A focused, ten-minute walkthrough of the four decision loci that anchor the R&amp;D scope of the proposed project. For each locus, this presentation states the technical uncertainty, explains why it cannot be resolved through engineering judgment alone, and identifies the project phase that addresses it. Press <strong>Play</strong> below to begin, or drag the scrubber to jump to a specific beat.</p>
+    <div class="hero-actions">
+      <a class="hero-action" href="../documents/PostaraTrend_D1-D4_Walkthrough_Transcript.docx">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M3 1.5h7l3 3V14a.5.5 0 0 1-.5.5h-9A.5.5 0 0 1 3 14V1.5z"/><path d="M9.5 1.5V5h3.5"/>
+        </svg>
+        Read transcript (.docx)
+      </a>
+      <a class="hero-action" href="../">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M2 8h12M8 2l-6 6 6 6"/>
+        </svg>
+        All walkthrough resources
+      </a>
+    </div>
+  </div>
+
+  <!-- ADVISORY NOTE -->
+  <div class="advisory">
+    <div class="advisory-icon">i</div>
+    <div>
+      <strong>Best experienced on desktop with audio enabled.</strong> This walkthrough uses
+      browser-based speech synthesis (Web Speech API). For best results, please use Chrome, Edge,
+      or Safari. If you can't use audio, a <a href="../documents/PostaraTrend_D1-D4_Walkthrough_Transcript.docx">read-along transcript (.docx)</a>
+      is available.
+    </div>
+  </div>
+
+  <!-- SECTION NAV -->
+  <nav class="section-nav">
+    <div class="section-nav-label">Sections</div>
     <ul class="scene-list" id="sceneList"></ul>
+  </nav>
 
-    <h2 style="margin-top: 24px;">Voice</h2>
-    <button class="primary" style="width: 100%; padding: 10px; border: 1px solid var(--border-strong); background: var(--surface); color: var(--navy); border-radius: var(--radius-sm); cursor: pointer; font-size: 12px; font-weight: 600;" onclick="openVoicePicker()">
-      Choose Voice
-    </button>
-    <div id="currentVoiceLabel" style="font-size: 11px; color: var(--text-muted); margin-top: 8px; word-break: break-word;"></div>
-  </aside>
+  <!-- DYNAMIC SCENE HEADER (updated by JS) -->
+  <div class="stage-header">
+    <span class="stage-eyebrow" id="stageEyebrow">Section 1</span>
+    <h2 class="stage-title" id="stageTitle">Loading…</h2>
+    <p class="stage-sub" id="stageSub" style="display:none;"></p>
+  </div>
 
-  <!-- ============= MAIN STAGE ============= -->
-  <main class="stage">
-    <div class="stage-header">
-      <span class="stage-eyebrow" id="stageEyebrow">Section 0</span>
-      <h1 class="stage-title" id="stageTitle">PostaraTrend AI — The Four R&D Uncertainties</h1>
-      <p class="stage-sub" id="stageSub">A focused walkthrough of the D1–D4 decision loci (~10 minutes)</p>
-    </div>
+  <!-- DIAGRAM CANVAS -->
+  <div class="canvas-wrap">
+    <div class="scene-label" id="sceneLabel">Scene 1</div>
+    <div id="svgContainer"></div>
+  </div>
 
-    <div class="canvas-wrap">
-      <div class="scene-label" id="sceneLabel">Scene 1 / 6</div>
-      <!-- All SVG scenes are rendered into this container, but only one shown at a time -->
-      <div id="svgContainer"></div>
-    </div>
+  <!-- CAPTION -->
+  <div class="caption">
+    <span class="caption-eyebrow" id="captionEyebrow">Section</span>
+    <div class="caption-text" id="captionText">Press Play to begin the technical walkthrough.</div>
+    <div class="caption-progress" id="captionProgress" style="width: 0%;"></div>
+  </div>
 
-    <div class="caption">
-      <span class="caption-eyebrow" id="captionEyebrow">Section</span>
-      <div class="caption-text" id="captionText">Press Play to begin the technical walkthrough.</div>
-      <div class="caption-progress" id="captionProgress" style="width: 0%;"></div>
-    </div>
-  </main>
+  <!-- COMPANION DOCUMENTS -->
+  <h2 class="section">Companion documents</h2>
+  <div class="docs-list">
+    <a class="doc-item" href="../documents/PostaraTrend_Statement_of_RD_Uncertainty.docx">
+      <div class="doc-icon">DOCX</div>
+      <div class="doc-info">
+        <div class="doc-title">Statement of R&amp;D Uncertainty</div>
+        <div class="doc-meta">Formal supplementary statement submitted with the IRAP application</div>
+      </div>
+      <div class="doc-arrow">↓</div>
+    </a>
+    <a class="doc-item current" href="../documents/PostaraTrend_D1-D4_Walkthrough_Transcript.docx">
+      <div class="doc-icon">DOCX</div>
+      <div class="doc-info">
+        <div class="doc-title">D1–D4 Walkthrough — Transcript<span class="doc-current-pill">This walkthrough</span></div>
+        <div class="doc-meta">Read-along version of the 10-minute walkthrough</div>
+      </div>
+      <div class="doc-arrow">↓</div>
+    </a>
+    <a class="doc-item" href="../documents/PostaraTrend_Technical_Voiceover_Transcript.docx">
+      <div class="doc-icon">DOCX</div>
+      <div class="doc-info">
+        <div class="doc-title">Full Technical Voiceover — Transcript</div>
+        <div class="doc-meta">Read-along version of the 25-minute deep-dive walkthrough</div>
+      </div>
+      <div class="doc-arrow">↓</div>
+    </a>
+  </div>
+
+  <footer>
+  <div>
+    <strong style="color: var(--navy);">PostaraTrend Technologies Inc.</strong>
+    <span class="footer-divider">·</span>
+    Corp. No. 2028037402
+    <span class="footer-divider">·</span>
+    BN 726572233
+    <span class="footer-divider">·</span>
+    Calgary, AB, T3P 2E9
+  </div>
+  <div style="margin-top: 6px;">
+    <a href="https://postaratrend.ca">postaratrend.ca</a>
+    <span class="footer-divider">·</span>
+    <a href="mailto:admin@postaratrend.ca">admin@postaratrend.ca</a>
+    <span class="footer-divider">·</span>
+    +1 587 889 8213
+  </div>
+  <div style="margin-top: 12px; color: var(--text-faint); font-size: 11px;">
+    This page is unlisted. Please do not share the URL outside the IRAP review context.
+  </div>
+</footer>
+
 </div>
 
-<!-- ============= PLAYER BAR ============= -->
+<!-- ============= STICKY PLAYER BAR ============= -->
 <div class="player">
-  <div class="scrubber-row">
-    <div class="scrubber-track" id="scrubberTrack" role="slider" aria-label="Walkthrough position" aria-valuemin="1" aria-valuenow="1">
-      <div class="scrubber-fill" id="scrubberFill"></div>
-      <div class="scrubber-ticks" id="scrubberTicks"></div>
-      <div class="scrubber-handle" id="scrubberHandle"></div>
+  <div class="player-inner">
+    <div class="scrubber-row">
+      <div class="scrubber-track" id="scrubberTrack" role="slider" aria-label="Walkthrough position" aria-valuemin="1" aria-valuenow="1">
+        <div class="scrubber-fill" id="scrubberFill"></div>
+        <div class="scrubber-ticks" id="scrubberTicks"></div>
+        <div class="scrubber-handle" id="scrubberHandle"></div>
+      </div>
+      <div class="scrubber-time" id="scrubberTime">1 / 1</div>
     </div>
-    <div class="scrubber-time" id="scrubberTime">1 / 1</div>
-  </div>
-  <div class="player-bottom">
-    <div class="player-info">
-      <div class="player-scene" id="playerScene">Ready</div>
-      <div class="player-status" id="playerStatus">Press Play to begin</div>
-    </div>
-    <div class="player-controls">
-      <button id="prevBtn" onclick="prevScene()">◀ Prev</button>
-      <button id="playBtn" class="primary" onclick="togglePlay()">▶ Play</button>
-      <button id="nextBtn" onclick="nextScene()">Next ▶</button>
-      <span class="speed-pill" onclick="cycleSpeed()" id="speedPill">1.0×</span>
+    <div class="player-bottom">
+      <div class="player-info">
+        <div class="player-scene" id="playerScene">Ready</div>
+        <div class="player-status" id="playerStatus">Press Play to begin</div>
+      </div>
+      <div class="player-controls">
+        <button id="prevBtn" onclick="prevScene()">◀ Prev</button>
+        <button id="playBtn" class="primary" onclick="togglePlay()">▶ Play</button>
+        <button id="nextBtn" onclick="nextScene()">Next ▶</button>
+        <span class="speed-pill" onclick="cycleSpeed()" id="speedPill">1.0×</span>
+        <button class="voice-trigger" onclick="openVoicePicker()" aria-label="Choose narration voice">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10v4a1 1 0 0 0 1 1h3l5 4V5L7 9H4a1 1 0 0 0-1 1z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+          Voice
+        </button>
+        <span class="voice-label-inline" id="currentVoiceLabel"></span>
+      </div>
     </div>
   </div>
 </div>
@@ -354,6 +633,7 @@
     </div>
   </div>
 </div>
+
 
 <script>
 /* ==========================================================================
